@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>[App Name] — Chat with Maya Chen</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "tertiary-fixed-dim": "#efbab4",
+          "surface-dim": "#dfd9d4",
+          "surface-container": "#f3ede7",
+          "surface-container-highest": "#e7e1dc",
+          "on-background": "#1d1b18",
+          "on-error-container": "#93000a",
+          "on-surface": "#1d1b18",
+          "on-tertiary-container": "#e0aca6",
+          "on-surface-variant": "#414845",
+          "on-primary-container": "#9dc0b0",
+          "error": "#ba1a1a",
+          "primary": "#18382d",
+          "tertiary-container": "#653f3b",
+          "tertiary": "#4b2926",
+          "secondary-fixed": "#ffdbd0",
+          "on-tertiary-fixed-variant": "#623d39",
+          "on-tertiary-fixed": "#301310",
+          "on-primary": "#ffffff",
+          "on-secondary": "#ffffff",
+          "tertiary-fixed": "#ffdad6",
+          "secondary-fixed-dim": "#ffb59d",
+          "on-secondary-fixed": "#390c00",
+          "outline-variant": "#c1c8c3",
+          "on-tertiary": "#ffffff",
+          "on-error": "#ffffff",
+          "surface-container-low": "#f9f2ed",
+          "primary-container": "#2f4f43",
+          "inverse-primary": "#abcebf",
+          "background": "#fff8f3",
+          "on-primary-fixed": "#002117",
+          "primary-fixed-dim": "#abcebf",
+          "on-primary-fixed-variant": "#2d4d41",
+          "outline": "#727974",
+          "surface-tint": "#456558",
+          "secondary-container": "#fea182",
+          "surface-container-lowest": "#ffffff",
+          "surface-bright": "#fff8f3",
+          "on-secondary-container": "#78351e",
+          "error-container": "#ffdad6",
+          "surface-variant": "#e7e1dc",
+          "surface-container-high": "#ede7e2",
+          "primary-fixed": "#c7ebda",
+          "surface": "#fff8f3",
+          "secondary": "#934a31",
+          "inverse-surface": "#32302d",
+          "on-secondary-fixed-variant": "#75331c",
+          "inverse-on-surface": "#f6f0ea"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "gutter": "1.5rem",
+          "space-sm": "0.5rem",
+          "margin-mobile": "1.25rem",
+          "space-lg": "1.5rem",
+          "space-md": "1rem",
+          "gutter-mobile": "1rem",
+          "space-xl": "2.5rem",
+          "space-xs": "0.25rem",
+          "margin": "3rem"
+        },
+        "fontFamily": {
+          "body-sm": ["DM Sans"],
+          "headline-lg": ["Newsreader"],
+          "headline-sm": ["Newsreader"],
+          "display-mobile": ["Newsreader"],
+          "headline-md": ["Newsreader"],
+          "headline-lg-mobile": ["Newsreader"],
+          "display": ["Newsreader"],
+          "label-md": ["DM Sans"],
+          "body-md": ["DM Sans"],
+          "body-lg": ["DM Sans"],
+          "label-sm": ["DM Sans"]
+        },
+        "fontSize": {
+          "body-sm": ["0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" }],
+          "headline-lg": ["2.5rem", { "lineHeight": "3rem", "letterSpacing": "-0.015em", "fontWeight": "400" }],
+          "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "0em", "fontWeight": "500" }],
+          "display-mobile": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+          "headline-md": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+          "headline-lg-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+          "display": ["3.5rem", { "lineHeight": "4rem", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+          "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.06em", "fontWeight": "600" }],
+          "body-md": ["0.9375rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" }],
+          "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+          "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.08em", "fontWeight": "600" }]
+        }
+      },
+    },
+  }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      vertical-align: middle;
+    }
+    .material-symbols-outlined[data-weight="fill"] {
+      font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-[#F7F3EC] text-[#1C1A17] min-h-screen flex flex-col justify-between antialiased selection:bg-primary selection:text-on-primary">
+<!-- Outer Mobile Shell -->
+<div class="w-full max-w-md mx-auto min-h-screen bg-[#F7F3EC] flex flex-col relative border-x border-[#E6DFD3] shadow-sm pb-36">
+<!-- 1. Header -->
+<header class="sticky top-0 z-40 bg-[#FFFDF9]/95 backdrop-blur-sm border-b border-[#E6DFD3] px-4 py-3 flex items-center justify-between transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<button aria-label="Go back" class="p-1 -ml-1 text-[#1C1A17] hover:opacity-75 active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[22px]" data-icon="arrow_back">arrow_back</span>
+</button>
+<!-- Avatar -->
+<div class="relative flex-shrink-0">
+<img alt="Maya Chen" class="w-10 h-10 rounded-full object-cover border border-[#E6DFD3]" src="https://lh3.googleusercontent.com/aida/AEtjO1V8oenxSLnGG7KKywLX3IAvQmDKhPVv8LqGiCVvpZZ592iDH3CvABrB3_cnBmRxv8EB4ZCjw55ttEEilsU2BBP2e9ba5Umm27WlnyVDXutfREIsAwkRjMLBWOQPiij-cmiegjcdM8hYDNdp1Dmun74DV4eDMOO0c7v2V5HP4QJpHKO0lSAVYIHA-uvOs1PIhAa8FDNPQ0gVs1yEgXZgfr_muoTLqg5K_2Bo5arL8OIEBjDqblrdviCUu9k"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#2F4F43] ring-2 ring-[#FFFDF9]"></span>
+</div>
+<!-- Meta -->
+<div class="flex flex-col min-w-0 ml-1">
+<div class="flex items-center gap-1.5">
+<h1 class="font-headline-sm text-base text-[#1C1A17] font-medium truncate leading-tight">Maya Chen</h1>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-label-sm uppercase tracking-wider font-semibold bg-[#2F4F43]/10 text-[#2F4F43]">
+              Connected
+            </span>
+</div>
+<p class="font-body-sm text-[12px] text-[#6B655C] truncate leading-tight mt-0.5">
+            Junior · Mechanical Engineering
+          </p>
+</div>
+</div>
+<!-- Trailing Action -->
+<button aria-label="More options" class="p-1 text-[#6B655C] hover:text-[#1C1A17] transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</header>
+<!-- Main Message Stream & Cards -->
+<main class="flex-1 px-4 pt-4 flex flex-col space-y-4">
+<!-- 2. Coffee-chat Nudge Card -->
+<section class="bg-[#EFE7DA] border border-[#E6DFD3] rounded-[14px] p-4 relative shadow-none transition-all" id="nudge-card">
+<button aria-label="Dismiss suggestion" class="absolute top-3.5 right-3.5 text-[#6B655C] hover:text-[#1C1A17] transition-colors" onclick="document.getElementById('nudge-card').style.display='none'" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="material-symbols-outlined text-[#2F4F43] text-[20px]" data-icon="local_cafe">local_cafe</span>
+<h2 class="font-headline-sm text-lg text-[#1C1A17] font-medium leading-none">Grab coffee?</h2>
+</div>
+<p class="font-body-sm text-xs text-[#6B655C] leading-relaxed pr-5">
+          Most coffee chats take 20–30 minutes. Pick a spot on campus that works for both of you.
+        </p>
+<!-- Section Overline -->
+<p class="font-label-sm text-[10px] text-[#6B655C] uppercase tracking-wider font-semibold mt-3 mb-2">
+          CONVERSATION STARTERS
+        </p>
+<!-- Chips -->
+<div class="flex flex-col gap-1.5">
+<button class="group flex items-center justify-between text-left bg-[#FFFDF9] hover:bg-[#F7F3EC] border border-[#E6DFD3] rounded-full py-1.5 px-3 transition-colors active:scale-[0.99]" type="button">
+<span class="font-body-sm text-xs text-[#1C1A17] font-medium pr-1">Ask about the robotics project she's most proud of</span>
+<span class="material-symbols-outlined text-[#6B655C] text-[14px] group-hover:translate-x-0.5 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="group flex items-center justify-between text-left bg-[#FFFDF9] hover:bg-[#F7F3EC] border border-[#E6DFD3] rounded-full py-1.5 px-3 transition-colors active:scale-[0.99]" type="button">
+<span class="font-body-sm text-xs text-[#1C1A17] font-medium pr-1">You both want to start a company. Compare notes.</span>
+<span class="material-symbols-outlined text-[#6B655C] text-[14px] group-hover:translate-x-0.5 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- CTA Button -->
+<button class="mt-3.5 w-full bg-[#2F4F43] hover:bg-[#243E35] text-[#FFFDF9] font-body-sm text-sm font-medium rounded-full py-2.5 px-4 text-center transition-colors active:scale-[0.98] flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+          Suggest a coffee chat
+        </button>
+</section>
+<!-- 3. Message Thread -->
+<div class="flex flex-col space-y-3.5 pt-1">
+<!-- Timestamp Divider -->
+<div class="flex items-center justify-center my-1">
+<span class="font-label-sm text-[11px] uppercase tracking-wider text-[#6B655C] px-3 py-0.5 rounded-full bg-[#EFE7DA]/60 border border-[#E6DFD3]/60 font-medium">
+            Today 2:14 PM
+          </span>
+</div>
+<!-- Incoming Bubble (Maya) -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="bg-[#FFFDF9] text-[#1C1A17] border border-[#E6DFD3] rounded-[18px] rounded-bl-sm p-3.5 shadow-none">
+<p class="font-body-md text-sm leading-relaxed">
+              Hey! Saw you're into supply chain — our robotics team has a sourcing mess I'd love advice on.
+            </p>
+</div>
+<div class="flex items-center gap-1 mt-1 ml-1">
+<span class="font-body-sm text-[10px] text-[#6B655C]">2:14 PM</span>
+</div>
+</div>
+<!-- Outgoing Bubble (User) -->
+<div class="flex flex-col items-end max-w-[85%] self-end">
+<div class="bg-[#2F4F43] text-[#FFFDF9] rounded-[18px] rounded-br-sm p-3.5 shadow-none">
+<p class="font-body-md text-sm leading-relaxed">
+              Ha, that's my favorite kind of mess. Happy to help.
+            </p>
+</div>
+<div class="flex items-center gap-1 mt-1 mr-1">
+<span class="font-body-sm text-[10px] text-[#6B655C]">2:16 PM</span>
+<span class="material-symbols-outlined text-[13px] text-[#2F4F43]" data-icon="done_all">done_all</span>
+</div>
+</div>
+</div>
+</main>
+<!-- 4. Composer (docked above bottom nav) -->
+<div class="fixed bottom-[65px] left-0 right-0 max-w-md mx-auto z-30 bg-[#F7F3EC] border-t border-[#E6DFD3] px-3.5 py-2.5">
+<form class="flex items-center gap-2" onsubmit="event.preventDefault();">
+<div class="flex-1 bg-[#FFFDF9] border border-[#E6DFD3] rounded-full flex items-center px-3 py-1.5 transition-all focus-within:border-[#2F4F43]">
+<button aria-label="Add attachment or photo" class="text-[#6B655C] hover:text-[#1C1A17] pr-1.5 transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="add_circle">add_circle</span>
+</button>
+<input class="w-full bg-transparent border-none p-0 text-sm font-body-md text-[#1C1A17] placeholder-[#6B655C] focus:ring-0 focus:outline-none" placeholder="Message Maya…" type="text"/>
+<button aria-label="Audio message" class="text-[#6B655C] hover:text-[#1C1A17] pl-1.5 transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="mic">mic</span>
+</button>
+</div>
+<button aria-label="Send message" class="w-9 h-9 rounded-full bg-[#2F4F43] hover:bg-[#243E35] text-[#FFFDF9] flex items-center justify-center flex-shrink-0 transition-transform active:scale-95" type="submit">
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_upward">arrow_upward</span>
+</button>
+</form>
+</div>
+<!-- 5. Bottom Tab Bar (docked at very bottom) -->
+<nav aria-label="Main Navigation" class="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40 bg-[#FFFDF9] border-t border-[#E6DFD3] flex items-center justify-around py-1.5 h-[65px]">
+<!-- Tab 1: Home -->
+<a class="flex flex-col items-center justify-center text-[#6B655C] hover:text-[#1C1A17] py-1 px-3 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="home">home</span>
+<span class="font-label-sm text-[10px] tracking-tight mt-0.5">Home</span>
+</a>
+<!-- Tab 2: Forum -->
+<a class="flex flex-col items-center justify-center text-[#6B655C] hover:text-[#1C1A17] py-1 px-3 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="forum">forum</span>
+<span class="font-label-sm text-[10px] tracking-tight mt-0.5">Forum</span>
+</a>
+<!-- Tab 3: Search -->
+<a class="flex flex-col items-center justify-center text-[#6B655C] hover:text-[#1C1A17] py-1 px-3 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="search">search</span>
+<span class="font-label-sm text-[10px] tracking-tight mt-0.5">Search</span>
+</a>
+<!-- Tab 4: Messages (Active State) -->
+<a class="flex flex-col items-center justify-center text-[#1C1A17] py-1 px-3 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="chat_bubble" data-weight="fill">chat_bubble</span>
+<span class="font-label-sm text-[10px] font-bold tracking-tight mt-0.5">Messages</span>
+</a>
+<!-- Tab 5: Profile -->
+<a class="flex flex-col items-center justify-center text-[#6B655C] hover:text-[#1C1A17] py-1 px-3 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="person">person</span>
+<span class="font-label-sm text-[10px] tracking-tight mt-0.5">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>

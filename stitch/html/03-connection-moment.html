@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connection Moment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#F7F3EC',
+            ink: '#1C1A17',
+            evergreen: '#2F4F43',
+            clay: '#B5654A',
+          },
+          fontFamily: {
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #F7F3EC;
+      color: #1C1A17;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    .clay-underline {
+      position: relative;
+      display: inline-block;
+    }
+    .clay-underline::after {
+      content: '';
+      position: absolute;
+      left: 15%;
+      right: 15%;
+      bottom: -6px;
+      height: 1.5px;
+      background-color: #B5654A;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-paper min-h-screen w-full flex flex-col justify-between items-center px-6 py-12 select-none relative overflow-hidden">
+  
+  <!-- Subtle top bar with exact placeholder name -->
+  <header class="w-full flex justify-between items-center pt-2">
+    <span class="font-serif italic text-lg tracking-tight text-ink/70">[App Name]</span>
+    <button class="w-9 h-9 rounded-full flex items-center justify-center text-ink/60 hover:text-ink hover:bg-black/5 transition-colors">
+      <span class="material-symbols-outlined text-[20px]">close</span>
+    </button>
+  </header>
+
+  <!-- Centered Content Composition -->
+  <main class="w-full max-w-sm flex flex-col items-center text-center my-auto py-8">
+    
+    <!-- Overlapping Photo Tiles -->
+    <div class="relative flex items-center justify-center w-full mb-10 h-36">
+      <!-- Left Photo Tile (User) -->
+      <div class="relative z-10 w-28 h-28 rounded-[20px] overflow-hidden shadow-sm border-[3px] border-paper bg-[#EAE4D9] -mr-4 transform -rotate-1 transition-transform hover:scale-105 duration-200">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-jMLnjzsRyqnW_v1lX6NpUD_NxBlFn7WanQ27MoJJvyUpnRvl3plcoODqOhpliCt_UXhrFh-pdvM3IbaCGkj3khKOH3C27E1boxI66OSRR8gLP4EFZbvhL0V-KqcDbImxj5D0nYigqONxaEzuDDmvgS2Xz1s-ex8ajUtWR4hvratQPAFMA2pQy2rFc2tmN8FTSAtgVgXKa6ccjYnkB3VFVf4N9tf_GCOZOeMZ7rV-V7DXHFAgU_F6T2rLs88kQS1-UKR8vFmnIb4" alt="User Profile Photo" class="w-full h-full object-cover object-center" />
+      </div>
+
+      <!-- Right Photo Tile (Maya) -->
+      <div class="relative z-20 w-28 h-28 rounded-[20px] overflow-hidden shadow-md border-[3px] border-paper bg-[#EAE4D9] transform rotate-2 transition-transform hover:scale-105 duration-200">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa6wv04cMvlF3aECC2alNieZP2QnxGzj2YxF-X9QqMyZE_7OuRQKVm5Atj2kr1IdPM7r_cmmixHxwLIa4SLe_uksh5Pkqm_wzAo0BbbSTrTVuQYL6SwEdbZrAGm1M4dbzfrVhw0OAtrjPSTCNZZmy8081v7hywlR-lEMqkx79fl9mNWOL3bqP9F4mdN85z0w8VKD-rBRxIuK9H5zehjTvlFXHpjKEm-O_JE-v7HkAKDieKE7AoCt8Uiz7MqUP8JJUNWuVoPlzLgUs" alt="Maya Chen Photo" class="w-full h-full object-cover object-center" />
+      </div>
+    </div>
+
+    <!-- Celebration Typography -->
+    <div class="space-y-3 mb-2">
+      <div class="clay-underline">
+        <h1 class="font-serif text-[32px] leading-tight font-medium text-ink tracking-tight">
+          You and Maya connected.
+        </h1>
+      </div>
+      
+      <p class="text-[15px] text-ink/65 font-normal tracking-normal pt-2">
+        You're both into entrepreneurship.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- Bottom Action Section (No Tab Bar) -->
+  <footer class="w-full max-w-sm flex flex-col items-center gap-4 pb-4">
+    <!-- Primary Evergreen Pill Button -->
+    <button class="w-full bg-evergreen hover:bg-[#253f35] active:scale-[0.98] text-paper font-medium text-[16px] py-4 rounded-full transition-all shadow-sm flex items-center justify-center gap-2">
+      <span>Say hi</span>
+      <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+    </button>
+
+    <!-- Tertiary Text Link -->
+    <button class="text-ink/60 hover:text-ink text-[14px] font-medium py-2 px-4 transition-colors">
+      Keep swiping
+    </button>
+  </footer>
+
+</body>
+</html>

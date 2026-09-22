@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search — CSE 205</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#F7F3EC',
+            surface: '#FFFDF9',
+            hairline: '#E6DFD3',
+            ink: '#1C1A17',
+            'ink-muted': '#6B655C',
+            evergreen: '#2F4F43',
+            'evergreen-soft': '#DCE6DF',
+            'evergreen-hover': '#243e34'
+          },
+          fontFamily: {
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #F7F3EC;
+      color: #1C1A17;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-outlined.filled {
+      font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-paper flex flex-col justify-between">
+  <!-- Main Container constrained to mobile view for accurate app experience -->
+  <div class="w-full max-w-md mx-auto flex flex-col min-h-screen pb-24 shadow-sm bg-paper relative">
+    
+    <!-- Header / Brand & Search Bar -->
+    <header class="pt-6 px-4 pb-3">
+      <!-- App Name Header Bar -->
+      <div class="flex items-center justify-between mb-4">
+        <span class="font-serif italic text-2xl tracking-tight text-ink font-normal">[App Name]</span>
+        <div class="flex items-center space-x-2 text-ink-muted">
+          <span class="text-xs uppercase tracking-widest font-medium text-ink-muted/80">ASU Directory</span>
+        </div>
+      </div>
+
+      <!-- 1. Large rounded search field with "CSE 205" and clear × -->
+      <div class="relative flex items-center">
+        <span class="material-symbols-outlined absolute left-4 text-ink-muted pointer-events-none text-[20px]">
+          search
+        </span>
+        <input 
+          type="text" 
+          value="CSE 205" 
+          aria-label="Search"
+          class="w-full h-12 pl-11 pr-11 bg-surface border border-hairline rounded-full text-base font-sans text-ink placeholder-ink-muted focus:outline-none focus:ring-1 focus:ring-evergreen shadow-sm"
+        />
+        <button 
+          type="button" 
+          aria-label="Clear search" 
+          class="absolute right-3.5 w-6 h-6 flex items-center justify-center rounded-full bg-hairline/80 text-ink-muted hover:text-ink transition-colors"
+        >
+          <span class="material-symbols-outlined text-[16px]">close</span>
+        </button>
+      </div>
+
+      <!-- 2. Segmented pill control: People (selected) | Posts -->
+      <div class="mt-4 p-1 bg-[#EBE5DB] rounded-full flex gap-1">
+        <button 
+          type="button" 
+          class="flex-1 py-1.5 text-xs font-semibold rounded-full bg-surface text-ink shadow-sm transition-all text-center flex items-center justify-center gap-1.5"
+        >
+          <span>People</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-evergreen-soft text-evergreen font-bold">4</span>
+        </button>
+        <button 
+          type="button" 
+          class="flex-1 py-1.5 text-xs font-medium rounded-full text-ink-muted hover:text-ink transition-colors text-center"
+        >
+          Posts
+        </button>
+      </div>
+
+      <!-- 3. Filter chip row: Major ▾ · Year ▾ · Goals ▾ -->
+      <div class="flex items-center gap-2 mt-3.5 overflow-x-auto no-scrollbar pb-1">
+        <button type="button" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-hairline bg-surface text-xs font-medium text-ink hover:border-evergreen/40 transition-colors shrink-0">
+          <span>Major</span>
+          <span class="material-symbols-outlined text-[16px] text-ink-muted leading-none">expand_more</span>
+        </button>
+        <button type="button" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-hairline bg-surface text-xs font-medium text-ink hover:border-evergreen/40 transition-colors shrink-0">
+          <span>Year</span>
+          <span class="material-symbols-outlined text-[16px] text-ink-muted leading-none">expand_more</span>
+        </button>
+        <button type="button" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-hairline bg-surface text-xs font-medium text-ink hover:border-evergreen/40 transition-colors shrink-0">
+          <span>Goals</span>
+          <span class="material-symbols-outlined text-[16px] text-ink-muted leading-none">expand_more</span>
+        </button>
+        <!-- Matching tag highlight badge -->
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] bg-evergreen-soft text-evergreen font-medium shrink-0 ml-auto border border-evergreen/10">
+          Enrolled in CSE 205
+        </span>
+      </div>
+    </header>
+
+    <!-- Results Section -->
+    <main class="flex-1 px-4 mt-2">
+      <!-- People Results Header -->
+      <div class="flex items-center justify-between pb-2 pt-1 border-b border-hairline">
+        <span class="text-[11px] font-semibold tracking-wider uppercase text-ink-muted">STUDENTS TAKING OR COMPLETED</span>
+        <span class="text-xs text-ink-muted">4 results</span>
+      </div>
+
+      <!-- 4. People result rows separated by hairlines -->
+      <div class="divide-y divide-hairline">
+        
+        <!-- Row 1: Sam Patel -->
+        <article class="py-3.5 flex items-start gap-3 hover:bg-surface/60 -mx-2 px-2 rounded-lg transition-colors cursor-pointer">
+          <div class="w-11 h-11 rounded-xl bg-evergreen-soft/80 flex items-center justify-center shrink-0 border border-evergreen/15 text-evergreen font-serif font-semibold text-base mt-0.5 shadow-sm">
+            SP
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-baseline justify-between gap-2">
+              <h3 class="font-serif text-lg text-ink font-medium leading-tight">Sam Patel</h3>
+            </div>
+            <p class="text-xs text-ink-muted mt-0.5">Freshman · Computer Science</p>
+            <div class="text-[13px] text-ink/90 mt-1 font-sans">
+              <span class="text-ink-muted text-xs">Now:</span> Student <span class="text-ink-muted mx-0.5">→</span> <span class="text-ink-muted text-xs">Dream:</span> <span class="font-medium text-ink">Software Engineer</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Row 2: Leah Nguyen (Connected) -->
+        <article class="py-3.5 flex items-start gap-3 hover:bg-surface/60 -mx-2 px-2 rounded-lg transition-colors cursor-pointer">
+          <div class="w-11 h-11 rounded-xl bg-evergreen-soft/80 flex items-center justify-center shrink-0 border border-evergreen/15 text-evergreen font-serif font-semibold text-base mt-0.5 shadow-sm">
+            LN
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-baseline justify-between gap-2">
+              <h3 class="font-serif text-lg text-ink font-medium leading-tight">Leah Nguyen</h3>
+              <span class="inline-flex items-center gap-1 text-[11px] font-medium text-evergreen bg-evergreen-soft px-2 py-0.5 rounded-full shrink-0 border border-evergreen/20">
+                <span class="w-1.5 h-1.5 rounded-full bg-evergreen"></span>
+                Connected
+              </span>
+            </div>
+            <p class="text-xs text-ink-muted mt-0.5">Sophomore · Software Engineering</p>
+            <div class="text-[13px] text-ink/90 mt-1 font-sans">
+              <span class="text-ink-muted text-xs">Now:</span> Student <span class="text-ink-muted mx-0.5">→</span> <span class="text-ink-muted text-xs">Dream:</span> <span class="font-medium text-ink">Software Engineer</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Row 3: Marcus King -->
+        <article class="py-3.5 flex items-start gap-3 hover:bg-surface/60 -mx-2 px-2 rounded-lg transition-colors cursor-pointer">
+          <div class="w-11 h-11 rounded-xl bg-evergreen-soft/80 flex items-center justify-center shrink-0 border border-evergreen/15 text-evergreen font-serif font-semibold text-base mt-0.5 shadow-sm">
+            MK
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-baseline justify-between gap-2">
+              <h3 class="font-serif text-lg text-ink font-medium leading-tight">Marcus King</h3>
+            </div>
+            <p class="text-xs text-ink-muted mt-0.5">Freshman · Data Science</p>
+            <div class="text-[13px] text-ink/90 mt-1 font-sans">
+              <span class="text-ink-muted text-xs">Now:</span> Student <span class="text-ink-muted mx-0.5">→</span> <span class="text-ink-muted text-xs">Dream:</span> <span class="font-medium text-ink">Software Engineer</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Row 4: Priya Raman -->
+        <article class="py-3.5 flex items-start gap-3 hover:bg-surface/60 -mx-2 px-2 rounded-lg transition-colors cursor-pointer">
+          <div class="w-11 h-11 rounded-xl bg-evergreen-soft/80 flex items-center justify-center shrink-0 border border-evergreen/15 text-evergreen font-serif font-semibold text-base mt-0.5 shadow-sm">
+            PR
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-baseline justify-between gap-2">
+              <h3 class="font-serif text-lg text-ink font-medium leading-tight">Priya Raman</h3>
+            </div>
+            <p class="text-xs text-ink-muted mt-0.5">Sophomore · Computer Science</p>
+            <div class="text-[13px] text-ink/90 mt-1 font-sans">
+              <span class="text-ink-muted text-xs">Now:</span> Student <span class="text-ink-muted mx-0.5">→</span> <span class="text-ink-muted text-xs">Dream:</span> <span class="font-medium text-ink">Software Engineer</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- 5. Below, overline "RELATED POSTS" with one compact post -->
+      <section class="mt-7 pt-4 border-t border-hairline">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-[11px] font-semibold tracking-wider uppercase text-ink-muted">RELATED POSTS</span>
+          <a href="#" class="text-xs font-medium text-evergreen hover:underline">View all</a>
+        </div>
+
+        <div class="bg-surface border border-hairline rounded-2xl p-4 shadow-sm hover:border-evergreen/30 transition-all">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-semibold tracking-wider uppercase bg-[#EAE4D9] text-ink-muted px-2 py-0.5 rounded">
+                STUDY GROUP
+              </span>
+              <span class="inline-block px-1.5 py-0.5 rounded text-xs font-semibold bg-evergreen-soft text-evergreen">
+                CSE 205
+              </span>
+            </div>
+            <span class="text-[11px] text-ink-muted">1d ago</span>
+          </div>
+
+          <h4 class="font-serif text-base text-ink font-medium leading-snug">
+            Object-Oriented Programming & Data Structures midterm study sprint.
+          </h4>
+
+          <div class="flex items-center justify-between mt-3.5 pt-3 border-t border-hairline/60">
+            <div class="flex items-center gap-1.5 text-xs text-ink-muted">
+              <span class="material-symbols-outlined text-[16px] text-ink-muted leading-none">calendar_today</span>
+              <span>Meets weekly · Tempe library</span>
+            </div>
+
+            <!-- Join pill -->
+            <button 
+              type="button" 
+              class="px-3.5 py-1.5 rounded-full bg-evergreen text-surface hover:bg-evergreen-hover text-xs font-semibold tracking-wide transition-colors shadow-sm"
+            >
+              Join
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 6. Bottom tab bar with exactly: Home, Forum, Search (active, filled), Messages, Profile -->
+    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-surface/95 backdrop-blur-md border-t border-hairline z-50">
+      <div class="grid grid-cols-5 py-2 px-1 text-center">
+        <!-- Home -->
+        <a href="#" class="flex flex-col items-center justify-center text-ink-muted hover:text-ink transition-colors py-1 group">
+          <span class="material-symbols-outlined text-[22px] group-hover:scale-105 transition-transform">home</span>
+          <span class="text-[11px] font-medium mt-1">Home</span>
+        </a>
+        <!-- Forum -->
+        <a href="#" class="flex flex-col items-center justify-center text-ink-muted hover:text-ink transition-colors py-1 group">
+          <span class="material-symbols-outlined text-[22px] group-hover:scale-105 transition-transform">forum</span>
+          <span class="text-[11px] font-medium mt-1">Forum</span>
+        </a>
+        <!-- Search (Active, filled) -->
+        <a href="#" class="flex flex-col items-center justify-center text-evergreen py-1 group" aria-current="page">
+          <span class="material-symbols-outlined filled text-[22px] scale-105">search</span>
+          <span class="text-[11px] font-semibold mt-1">Search</span>
+        </a>
+        <!-- Messages -->
+        <a href="#" class="flex flex-col items-center justify-center text-ink-muted hover:text-ink transition-colors py-1 group">
+          <span class="material-symbols-outlined text-[22px] group-hover:scale-105 transition-transform">chat_bubble_outline</span>
+          <span class="text-[11px] font-medium mt-1">Messages</span>
+        </a>
+        <!-- Profile -->
+        <a href="#" class="flex flex-col items-center justify-center text-ink-muted hover:text-ink transition-colors py-1 group">
+          <span class="material-symbols-outlined text-[22px] group-hover:scale-105 transition-transform">person_outline</span>
+          <span class="text-[11px] font-medium mt-1">Profile</span>
+        </a>
+      </div>
+    </nav>
+
+  </div>
+</body>
+</html>
