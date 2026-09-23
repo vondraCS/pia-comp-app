@@ -48,6 +48,24 @@ It is a clickable demo, not a working product. It needs to show clearly:
 ### Direction: warm editorial
 The app should feel like a well-designed magazine: warm paper tones, confident serif headlines, calm sans-serif body text, and a single deep accent. It should read as **thoughtful and grown-up**, the opposite of loud, gamified or party-coded.
 
+> **Under review (Sept 2026).** The warm-editorial direction below reads as too
+> serious for the audience, and the serif display face is being dropped. Four
+> alternative directions are implemented as token sets in
+> `demo/css/themes.css` and can be compared live on the real screens using the
+> switcher in the demo (top right, or press `T`):
+>
+> | Theme | Palette | Display face |
+> |---|---|---|
+> | **Signal** | Cool grey paper, cobalt accent | Geist |
+> | **Nightshift** | Charcoal dark mode, citrus lime accent | Space Grotesk |
+> | **Grove** | Pale sage paper, olive accent | Outfit |
+> | **Court** | Monochrome, raspberry accent | Bricolage Grotesque |
+>
+> The rest of this section documents the current default (`Editorial`) and is
+> accurate for it. Once a direction is chosen, fold it into this section and
+> port it to `landing/landing.css`, which still carries the warm-editorial
+> palette.
+
 ### Inspirations (and what to borrow)
 | App | What to borrow |
 |---|---|

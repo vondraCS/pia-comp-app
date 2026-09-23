@@ -138,7 +138,7 @@
       <div class="screen" style="display:grid;align-content:center;text-align:center">
         <h1 class="display" style="font-size:40px;margin-bottom:16px">Meet the people who'll shape your career.</h1>
         <p class="muted" style="margin:0 0 28px">A professional network, built by and for ASU students.</p>
-        <p class="serif" data-snippet style="font-style:italic;color:var(--ink-muted);font-size:18px;transition:opacity 500ms;margin:0">${snippets[0]}</p>
+        <p class="serif" data-snippet style="font-style:var(--prompt-style);font-weight:var(--prompt-weight);color:var(--ink-muted);font-size:18px;transition:opacity 500ms;margin:0">${snippets[0]}</p>
       </div>
       <div class="page-foot" style="flex-direction:column;border-top:0;gap:4px"><button class="btn btn-primary btn-block" data-start>Continue with ASU email</button><button class="btn btn-ghost" data-how>How it works</button></div>
     </div>`;

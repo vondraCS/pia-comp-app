@@ -454,7 +454,7 @@
           <div class="section" style="margin-top:24px"><div class="overline">Refine</div><div class="chips">
             ${[["shorter", "Shorter"], ["detail", "More detail"], ["leadership", "Emphasize leadership"], ["technical", "Emphasize technical skills"]].map(([k, l]) => `<button class="chip ${st.variant === k ? "is-on" : ""}" data-variant="${k}">${l}</button>`).join("")}
           </div></div>
-          <details class="card" style="margin-top:24px"><summary class="overline" style="margin:0;cursor:pointer">Your words</summary><p class="serif" style="font-style:italic;color:var(--ink-muted);margin:8px 0 0">${esc(st.text)}</p></details>
+          <details class="card" style="margin-top:24px"><summary class="overline" style="margin:0;cursor:pointer">Your words</summary><p class="serif" style="font-style:var(--prompt-style);font-weight:var(--prompt-weight);color:var(--ink-muted);margin:8px 0 0">${esc(st.text)}</p></details>
           <div class="list-row" style="margin-top:16px;border:0"><div class="grow"><div style="font-weight:500">Show on my profile</div><div class="meta">Connections and people you meet will see this</div></div><label class="switch"><input type="checkbox" data-show ${st.show ? "checked" : ""}><span></span></label></div>
         </div>`;
         foot.innerHTML = `<button class="btn btn-secondary" data-copy>${icon("copy")}Copy</button><button class="btn btn-primary" data-save>Save experience</button>`;
