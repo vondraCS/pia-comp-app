@@ -1,4 +1,4 @@
-/* [App Name] landing page. No scroll listeners: IntersectionObserver only. */
+/* SunLinks landing page. No scroll listeners: IntersectionObserver only. */
 (function () {
   document.documentElement.classList.add("js");
   if (window.lucide) window.lucide.createIcons({ attrs: { "stroke-width": 1.75 } });

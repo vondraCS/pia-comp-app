@@ -51,7 +51,7 @@
             </div></div>`
         : `<div class="empty" style="padding-top:96px"><h2 class="title">No one yet.</h2><p>Great prompts get noticed. Want to polish yours?</p><a class="btn btn-secondary" href="profile.html">Edit prompts</a></div>`;
     }
-    screen.innerHTML = `<header class="appbar"><span class="wordmark">[App Name]</span><span class="spacer"></span>
+    screen.innerHTML = `<header class="appbar"><span class="wordmark">SunLinks</span><span class="spacer"></span>
         <button class="icon-btn" data-prefs aria-label="Deck preferences">${icon("sliders-horizontal")}</button></header>
       <div class="pad"><div class="segmented" role="tablist">
         <button class="${view === "discover" ? "is-on" : ""}" data-view="discover">Discover</button>
