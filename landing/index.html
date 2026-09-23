@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>[App Name] · Career connections for ASU students</title>
+  <meta name="description" content="Match with ASU students on goals and experience, not photos. Meet for coffee, and turn what you've done into resume-ready language.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="img/02-discover.png" fetchpriority="high">
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav__inner">
+      <a class="wordmark" href="#top" aria-label="[App Name] home">[App Name]</a>
+      <nav class="nav__links" aria-label="Sections">
+        <a href="#how">How it works</a>
+        <a href="#translator">Translator</a>
+        <a href="#forum">Forum</a>
+      </nav>
+      <a class="btn btn--primary btn--sm" href="../demo/index.html">Try the demo</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero: asymmetric split. Copy left, two real app screens right. -->
+    <section class="hero" id="top">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow load" style="--i:0">For ASU students</p>
+          <h1 class="hero__title load" style="--i:1">Meet the students you'd <em>never</em> meet in class.</h1>
+          <p class="hero__sub load" style="--i:2">Match on goals and experience, not photos. Connect with ASU students across majors, then grab coffee.</p>
+          <div class="hero__ctas load" style="--i:3">
+            <a class="btn btn--primary" href="../demo/index.html">Try the demo <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+            <a class="btn btn--ghost" href="#how">See how it works</a>
+          </div>
+        </div>
+        <div class="hero__stage" aria-hidden="false">
+          <figure class="phone phone--back load-phone" style="--i:1">
+            <img src="img/03-connection-moment.png" width="780" height="1688" alt="Connection screen: photos of Jordan and Maya side by side, with the text 'You and Maya connected. You're both into entrepreneurship.'">
+          </figure>
+          <figure class="phone phone--front load-phone" style="--i:0">
+            <img src="img/02-discover.png" width="780" height="1688" fetchpriority="high" alt="Discover screen: a profile card for Maya Chen, Junior in Mechanical Engineering, showing her current title Robotics Club Lead, dream title Robotics Engineer, and a prompt answer, with Pass and Connect buttons.">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem statement: offset editorial type, no asset. -->
+    <section class="statement">
+      <div class="wrap">
+        <p class="statement__lead reveal">You've done more than you think. The hard part is <em>saying it</em>.</p>
+        <p class="statement__body reveal">Shifts at the campus coffee shop, a club you run, a class project that got out of hand. [App Name] helps you put it into words, and introduces you to people who can help you use it.</p>
+      </div>
+    </section>
+
+    <!-- How it works: sticky phone on desktop that swaps screens as each step scrolls past. -->
+    <section class="how" id="how" aria-labelledby="how-title">
+      <div class="wrap how__grid">
+        <div class="how__steps">
+          <h2 class="h2" id="how-title">How it works</h2>
+
+          <article class="step" data-screen="0">
+            <h3 class="step__title">Build a profile around where you're headed</h3>
+            <p>Your current title, your dream title, your goals and a few prompts. Everything on it is written so someone can reply.</p>
+            <figure class="phone phone--inline"><img src="img/09-my-profile.png" width="780" height="1688" loading="lazy" alt="Profile screen for Jordan Reyes: Operations Intern now, Head of Operations as the dream, with goals and an About section."></figure>
+          </article>
+
+          <article class="step" data-screen="1">
+            <h3 class="step__title">Connect on substance</h3>
+            <p>Cards lead with goals and experience. Swipe right to connect, left to pass, or use the buttons if you'd rather tap.</p>
+            <figure class="phone phone--inline"><img src="img/02-discover.png" width="780" height="1688" loading="lazy" alt="Discover screen showing Maya Chen's profile card."></figure>
+          </article>
+
+          <article class="step" data-screen="2">
+            <h3 class="step__title">It's a connection</h3>
+            <p>When you both tap Connect, photos appear and the chat opens. We'll show you what you have in common.</p>
+            <figure class="phone phone--inline"><img src="img/03-connection-moment.png" width="780" height="1688" loading="lazy" alt="Connection screen with photos of Jordan and Maya."></figure>
+          </article>
+
+          <article class="step" data-screen="3">
+            <h3 class="step__title">Grab coffee</h3>
+            <p>Every new chat starts with a gentle nudge toward a short coffee chat on campus, plus a couple of ways to break the ice.</p>
+            <figure class="phone phone--inline"><img src="img/05-chat-coffee-nudge.png" width="780" height="1688" loading="lazy" alt="Chat with Maya showing a 'Grab coffee?' card with conversation starters and a Suggest a coffee chat button."></figure>
+          </article>
+        </div>
+
+        <div class="how__sticky" aria-hidden="true">
+          <figure class="phone phone--sticky">
+            <img class="is-active" src="img/09-my-profile.png" width="780" height="1688" alt="" loading="lazy">
+            <img src="img/02-discover.png" width="780" height="1688" alt="" loading="lazy">
+            <img src="img/03-connection-moment.png" width="780" height="1688" alt="" loading="lazy">
+            <img src="img/05-chat-coffee-nudge.png" width="780" height="1688" alt="" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Translator: a real, working mini-version of the feature (pre-written output, same as the prototype). -->
+    <section class="translator" id="translator" aria-labelledby="tr-title">
+      <div class="wrap">
+        <p class="eyebrow">Experience Translator</p>
+        <h2 class="h2 translator__title" id="tr-title">Say it casually. Get it resume-ready.</h2>
+        <p class="lede">Describe what you did in your own words. The Translator turns it into bullet points and pulls out the skills it shows.</p>
+
+        <div class="tr reveal">
+          <div class="tr__pane tr__pane--in">
+            <p class="tr__label">What you wrote</p>
+            <p class="tr__meta">Barista, Campus Coffee Co.</p>
+            <blockquote class="tr__casual">&ldquo;I worked at the campus coffee shop. Trained like 6 new people, and figured out a faster way to handle the morning rush.&rdquo;</blockquote>
+            <button class="btn btn--primary tr__go" type="button" id="tr-go">
+              <i data-lucide="sparkles" aria-hidden="true"></i><span>Translate</span>
+            </button>
+          </div>
+
+          <div class="tr__pane tr__pane--out" id="tr-out" data-state="empty" aria-live="polite">
+            <p class="tr__label">Resume-ready</p>
+
+            <div class="tr__empty">
+              <i data-lucide="file-text" aria-hidden="true"></i>
+              <p>Tap <strong>Translate</strong> to see this experience as resume bullets.</p>
+            </div>
+
+            <div class="tr__loading" aria-hidden="true">
+              <span></span><span></span><span></span><span class="short"></span>
+            </div>
+
+            <div class="tr__result">
+              <ul class="tr__bullets" id="tr-bullets"></ul>
+              <p class="tr__label tr__label--sub">Skills shown</p>
+              <ul class="chips" id="tr-skills"></ul>
+              <div class="tr__actions">
+                <div class="chips chips--refine" role="group" aria-label="Refine">
+                  <button type="button" class="chip" data-variant="shorter">Shorter</button>
+                  <button type="button" class="chip" data-variant="detail">More detail</button>
+                  <button type="button" class="chip" data-variant="leadership">Emphasize leadership</button>
+                  <button type="button" class="chip" data-variant="technical">Emphasize technical skills</button>
+                </div>
+                <button type="button" class="btn btn--ghost btn--sm tr__copy" id="tr-copy">
+                  <i data-lucide="copy" aria-hidden="true"></i><span>Copy bullets</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Forum: 5 content items, 5 bento cells. -->
+    <section class="forum" id="forum" aria-labelledby="forum-title">
+      <div class="wrap">
+        <h2 class="h2" id="forum-title">Where ASU students trade what they know.</h2>
+        <p class="lede">Ask questions, post openings, find a study group, and see which campus career events your connections are going to.</p>
+
+        <div class="bento">
+          <figure class="cell cell--shot reveal">
+            <div class="cell__shot"><img src="img/06-forum-feed.png" width="780" height="1688" loading="lazy" alt="Forum feed with an events strip at the top, a question post from Sam Patel and an opportunity post from Aaliyah Brooks."></div>
+          </figure>
+
+          <article class="cell cell--question reveal">
+            <p class="tag">Question</p>
+            <p class="cell__quote">&ldquo;Any resume tips for a first internship when you don't have work experience yet?&rdquo;</p>
+            <div class="cell__foot">
+              <span class="mono-tile" style="--tint:var(--tint-2)">SP</span>
+              <span><strong>Sam Patel</strong><br><span class="muted">Freshman, Computer Science</span></span>
+              <span class="cell__stat"><i data-lucide="thumbs-up" aria-hidden="true"></i> Helpful answers get pinned</span>
+            </div>
+          </article>
+
+          <article class="cell cell--events reveal">
+            <p class="tag">Campus events</p>
+            <div class="event">
+              <span class="event__date"><small>Sep</small>29</span>
+              <span><strong>Career Fair Prep Workshop</strong><br><span class="muted">Memorial Union</span></span>
+            </div>
+            <p class="muted small">See which of your connections are going.</p>
+          </article>
+
+          <article class="cell cell--opp reveal">
+            <p class="tag tag--on-dark">Opportunity</p>
+            <h3 class="cell__title">Design co-founder</h3>
+            <p>Early-stage edtech startup, posted by Aaliyah Brooks.</p>
+            <button type="button" class="btn btn--light btn--sm js-toggle" aria-pressed="false" data-on="Interested" data-off="I'm interested">
+              <span>I'm interested</span>
+            </button>
+          </article>
+
+          <article class="cell cell--study reveal">
+            <p class="tag">Study group</p>
+            <h3 class="cell__title">CSE 205, Tuesday nights</h3>
+            <p class="muted">Object-oriented programming. Meets weekly in Hayden Library.</p>
+            <button type="button" class="btn btn--ghost btn--sm js-toggle" aria-pressed="false" data-on="Joined" data-off="Join group">
+              <span>Join group</span>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Substance over looks: monogram tiles slide together and reveal photos, the same beat as the in-app connection moment. -->
+    <section class="reveal-photos" aria-labelledby="photos-title">
+      <div class="wrap reveal-photos__inner">
+        <div class="pair" id="pair" aria-hidden="true">
+          <div class="pair__tile pair__tile--l">
+            <span class="pair__mono">JR</span>
+            <img src="img/me.jpg" width="600" height="600" alt="" loading="lazy">
+          </div>
+          <div class="pair__tile pair__tile--r">
+            <span class="pair__mono">MC</span>
+            <img src="img/maya.jpg" width="600" height="600" alt="" loading="lazy">
+          </div>
+        </div>
+        <h2 class="h2" id="photos-title">Photos stay hidden until you both connect.</h2>
+        <p class="lede">Until then, people see your goals, titles and experience. It keeps things professional, and it keeps the focus on what you've done.</p>
+        <p class="asu-note"><i data-lucide="lock" aria-hidden="true"></i> Only people with an asu.edu email can join.</p>
+      </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section class="closer">
+      <div class="wrap closer__inner">
+        <h2 class="closer__title">Grab coffee?</h2>
+        <p class="closer__sub">Click through the whole prototype: onboarding, matching, the forum, messages and the Translator.</p>
+        <a class="btn btn--primary btn--lg" href="../demo/index.html">Try the demo <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span class="wordmark wordmark--sm">[App Name]</span>
+      <nav class="footer__links" aria-label="Prototype screens">
+        <a href="../demo/home.html">Home</a>
+        <a href="../demo/forum.html">Forum</a>
+        <a href="../demo/search.html">Search</a>
+        <a href="../demo/messages.html">Messages</a>
+        <a href="../demo/profile.html">Profile</a>
+      </nav>
+      <p class="muted small">A clickable prototype for ASU students.</p>
+    </div>
+  </footer>
+
+  <script src="../demo/js/vendor/lucide.min.js"></script>
+  <script src="landing.js"></script>
+</body>
+</html>
