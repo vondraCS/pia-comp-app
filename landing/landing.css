@@ -1,38 +1,41 @@
 /* ==========================================================================
    [App Name] landing page
-   Tokens follow app-design-document.md §3 (warm editorial) and mirror
+   Tokens follow app-design-document.md §3 (Court) and mirror
    demo/css/tokens.css, plus a dark set the app doesn't define yet.
 
-   Shape rule: buttons and chips are pills, content cards 14px,
-   large panels 20px, phone frames 44px (device shape).
+   Shape rule: buttons and chips are pills, content cards 8px,
+   large panels 12px, phone frames 44px (device shape).
    ========================================================================== */
 :root {
-  --paper: #F7F3EC;
-  --surface: #FFFDF9;
-  --ink: #1C1A17;
-  --ink-muted: #6B655C;
-  --hairline: #E6DFD3;
-  --accent: #2F4F43;
-  --accent-soft: #DCE6DF;
-  --accent-ink: #FFFDF9;
-  --spice: #B5654A;
-  --sand: #EFE7DA;
-  --bezel: #1C1A17;
-  --skeleton: #E9E2D6;
+  --paper: #F2F2F1;
+  --surface: #FCFCFB;
+  --ink: #171717;
+  --ink-muted: #636363;
+  --hairline: #E2E2E1;
+  --accent: #BE2853;
+  --accent-soft: #FBE3EB;
+  --accent-ink: #FFFBFC;
+  --spice: #262626;
+  --sand: #EAEAE8;
+  --bezel: #171717;
+  --skeleton: #E6E6E5;
 
-  --tint-1: #DCE6DF;
-  --tint-2: #EFE0D6;
+  --tint-1: #E7E7E5;
+  --tint-2: #EBE4E7;
 
-  --font-serif: "Newsreader", Georgia, serif;
-  --font-sans: "Instrument Sans", system-ui, sans-serif;
+  /* --font-serif is the historic name for the display face. Court's display
+     face is a grotesque, so the name is now an alias rather than a promise. */
+  --font-display: "Bricolage Grotesque", "Geist", system-ui, sans-serif;
+  --font-serif: var(--font-display);
+  --font-sans: "Geist", system-ui, sans-serif;
 
-  --r-panel: 20px;
-  --r-card: 14px;
+  --r-panel: 12px;
+  --r-card: 8px;
   --r-pill: 999px;
   --r-phone: 44px;
 
-  --shadow-float: 0 18px 48px rgba(28, 26, 23, 0.14);
-  --shadow-soft: 0 8px 24px rgba(28, 26, 23, 0.08);
+  --shadow-float: 0 18px 48px rgba(23, 23, 23, 0.16);
+  --shadow-soft: 0 8px 24px rgba(23, 23, 23, 0.10);
 
   --ease: cubic-bezier(.16, 1, .3, 1);
   --gutter: 20px;
@@ -42,39 +45,41 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #151816;
-    --surface: #1D211F;
-    --ink: #EEE9E0;
-    --ink-muted: #A7A095;
-    --hairline: #2D322F;
-    --accent: #8FBCA7;
-    --accent-soft: #24332C;
-    --accent-ink: #10201A;
-    --sand: #1A1E1C;
-    --bezel: #0B0D0C;
-    --skeleton: #2A2F2C;
-    --tint-1: #2A3A33;
-    --tint-2: #3A2F29;
-    --shadow-float: 0 18px 48px rgba(0, 0, 0, 0.45);
-    --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.3);
+    --paper: #141414;
+    --surface: #1C1C1C;
+    --ink: #EDEDEC;
+    --ink-muted: #A3A3A3;
+    --hairline: #2C2C2C;
+    --accent: #EC5B86;        /* raspberry lifted for dark: 5.6:1 on paper */
+    --accent-soft: #2E1A20;
+    --accent-ink: #1A1013;
+    --spice: #E5E5E4;         /* inverts with the page so badges stay visible */
+    --sand: #191919;
+    --bezel: #0A0A0A;
+    --skeleton: #2A2A2A;
+    --tint-1: #2A2A28;
+    --tint-2: #302A2D;
+    --shadow-float: 0 18px 48px rgba(0, 0, 0, 0.5);
+    --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.34);
   }
 }
 :root[data-theme="dark"] {
-  --paper: #151816;
-  --surface: #1D211F;
-  --ink: #EEE9E0;
-  --ink-muted: #A7A095;
-  --hairline: #2D322F;
-  --accent: #8FBCA7;
-  --accent-soft: #24332C;
-  --accent-ink: #10201A;
-  --sand: #1A1E1C;
-  --bezel: #0B0D0C;
-  --skeleton: #2A2F2C;
-  --tint-1: #2A3A33;
-  --tint-2: #3A2F29;
-  --shadow-float: 0 18px 48px rgba(0, 0, 0, 0.45);
-  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --paper: #141414;
+  --surface: #1C1C1C;
+  --ink: #EDEDEC;
+  --ink-muted: #A3A3A3;
+  --hairline: #2C2C2C;
+  --accent: #EC5B86;        /* raspberry lifted for dark: 5.6:1 on paper */
+  --accent-soft: #2E1A20;
+  --accent-ink: #1A1013;
+  --spice: #E5E5E4;         /* inverts with the page so badges stay visible */
+  --sand: #191919;
+  --bezel: #0A0A0A;
+  --skeleton: #2A2A2A;
+  --tint-1: #2A2A28;
+  --tint-2: #302A2D;
+  --shadow-float: 0 18px 48px rgba(0, 0, 0, 0.5);
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.34);
 }
 
 /* ---------- Base ---------- */
@@ -93,6 +98,10 @@ a { color: inherit; }
 h1, h2, h3, p, figure, blockquote, ul { margin: 0; }
 ul { padding: 0; list-style: none; }
 em { font-style: italic; }
+/* Display type has no true italic, so emphasis there is carried by the
+   accent colour rather than a synthesised slant. Body copy keeps italics. */
+.hero__title em, .closer__title em, .statement__lead em,
+.section__title em, .cell__quote em { font-style: normal; color: var(--accent); }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
 
@@ -164,7 +173,7 @@ button { font: inherit; color: inherit; }
 }
 .nav.is-scrolled { border-bottom-color: var(--hairline); }
 .nav__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.wordmark { font: italic 400 24px/1 var(--font-serif); text-decoration: none; letter-spacing: -0.01em; }
+.wordmark { font: 700 24px/1 var(--font-display); text-decoration: none; letter-spacing: -0.03em; }
 .wordmark--sm { font-size: 20px; }
 .nav__links { display: none; gap: 32px; font-size: 15px; }
 .nav__links a { text-decoration: none; color: var(--ink-muted); transition: color .2s; }
@@ -260,7 +269,7 @@ button { font: inherit; color: inherit; }
 .tr__label--sub { margin: 24px 0 10px; }
 .tr__meta { font-weight: 500; }
 .tr__casual {
-  margin: 12px 0 28px; font: italic 400 clamp(1.25rem, 2vw, 1.5rem)/1.4 var(--font-serif); max-width: 32ch;
+  margin: 12px 0 28px; font: 600 clamp(1.25rem, 2vw, 1.5rem)/1.4 var(--font-display); max-width: 32ch;
 }
 .tr__go { align-self: flex-start; margin-top: auto; }
 .tr__go[disabled] { opacity: .6; cursor: default; }

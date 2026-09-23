@@ -59,6 +59,15 @@
   const isConnected = (id) => Store.get().connected.includes(id);
   const isPending = (id) => Store.get().pending.includes(id);
 
+  /* Grouped facts as an inset panel: a small muted label over a larger dark
+     value. Used for the Now/Dream pair everywhere it appears, so the deck card
+     and the full profile state the same thing the same way. */
+  function dataPanel(pairs) {
+    return `<div class="data-panel">${pairs
+      .map(([label, value]) => `<div><div class="overline">${esc(label)}</div><div class="val">${esc(value)}</div></div>`)
+      .join("")}</div>`;
+  }
+
   function avatar(p, cls = "") {
     const showPhoto = p.photo && (p.id === "me" || isConnected(p.id));
     return `<span class="mono ${cls}" data-tint="${p.tint || 1}">${showPhoto ? `<img src="${p.photo}" alt="${esc(fullName(p))}">` : initials(p)}</span>`;
@@ -95,6 +104,46 @@
     const nav = $("#tabbar"); if (nav) { nav.dataset.active = active; nav.innerHTML = tabbar(active); }
     if (!$(".toast-host")) $(".phone").insertAdjacentHTML("beforeend", '<div class="toast-host"></div>');
     icons();
+  }
+
+  /* ---------- Segmented control ---------- */
+  /* Every tab re-renders by replacing screen.innerHTML, so the rebuilt control
+     is born with the correct button already marked .is-on — a CSS transition on
+     .is-on has no start value to interpolate from and would silently do
+     nothing. Instead the active button is painted by a separate thumb element:
+     we remember where each control last sat, drop the thumb there, force the
+     browser to take that as the start position, then move it. First render has
+     nothing remembered, so the thumb is simply placed — no motion on load.
+
+     `key` identifies the control across renders. It has to be passed in because
+     the element itself does not survive one. */
+  const segLast = new Map();
+  function segmented(root, key) {
+    const el = typeof root === "string" ? $(root) : root;
+    if (!el) return;
+    const btns = $$("button", el);
+    if (!btns.length) return;
+    const to = Math.max(0, btns.findIndex((b) => b.classList.contains("is-on")));
+
+    let thumb = $(".seg-thumb", el);
+    if (!thumb) {
+      thumb = document.createElement("span");
+      thumb.className = "seg-thumb";
+      thumb.setAttribute("aria-hidden", "true");
+      el.prepend(thumb);
+    }
+    // Buttons are flex:1 inside a track with 3px of padding on each side, so
+    // every segment is the same width and translateX(i * 100%) lands exactly.
+    // Measure offsetLeft instead if segments ever stop being equal.
+    thumb.style.width = `calc((100% - 6px) / ${btns.length})`;
+
+    const from = segLast.has(key) ? segLast.get(key) : to;
+    segLast.set(key, to);
+    thumb.style.transition = "none";
+    thumb.style.transform = `translateX(${from * 100}%)`;
+    void thumb.offsetWidth; // flush the start position, or both writes coalesce
+    thumb.style.transition = "";
+    thumb.style.transform = `translateX(${to * 100}%)`;
   }
 
   /* ---------- Toast ---------- */
@@ -172,16 +221,15 @@
     const exps = p.experiences.filter((e) => e.visible !== false);
     return `<div class="pad" style="padding-bottom:32px">
       <div class="profile-head">
-        ${avatar(p, "xl")}
-        <div>
-          <h1 class="display">${esc(fullName(p))}</h1>
-          <div class="meta" style="margin-top:4px">${esc(p.year)} · ${esc(p.major)}</div>
-          ${connected && p.id !== "me" ? `<div style="margin-top:8px"><span class="pill-label">${icon("check")}Connected</span></div>` : ""}
-        </div>
-        <div class="titles">
-          <div><div class="overline">Now</div><div>${esc(p.now)}</div></div>
-          <div><div class="overline">Dream</div><div>${esc(p.dream)}</div></div>
-        </div>
+        <header class="card-id">
+          ${avatar(p, "xl")}
+          <div class="txt">
+            <h1 class="card-name">${esc(fullName(p))}</h1>
+            <div class="meta card-sub">${esc(p.year)} · ${esc(p.major)}</div>
+            ${connected && p.id !== "me" ? `<div class="card-tag"><span class="pill-label">${icon("check")}Connected</span></div>` : ""}
+          </div>
+        </header>
+        ${dataPanel([["Now", p.now], ["Dream", p.dream]])}
       </div>
       <div class="section"><div class="overline">Goals</div><div class="chips">${p.goals.map((g) => `<span class="chip static">${esc(g)}</span>`).join("")}</div></div>
       <div class="section"><div class="overline">About</div><p style="margin:0">${esc(p.bio)}</p></div>
@@ -192,10 +240,10 @@
           <p style="margin:0">${esc(pr.a)}</p>
           ${!preview && p.id !== "me" && !connected ? `<div class="connect-hint">${icon("message-circle-plus")}</div>` : ""}
         </div>`).join("")}</div>` : ""}
-      ${exps.length ? `<div class="section"><div class="overline">Experiences</div><div class="card" style="padding:0 16px">${exps.map(expHTML).join("")}</div></div>` : ""}
+      ${exps.length ? `<div class="section"><div class="overline">Experiences</div><div class="card list">${exps.map(expHTML).join("")}</div></div>` : ""}
       ${p.resume ? `<div class="section"><div class="overline">Resume</div><button class="card doc-card" data-resume><span class="doc-ico">${icon("file-text")}</span><span><b style="font-weight:500">Resume</b><div class="meta">PDF · Updated Sep 2026</div></span></button></div>` : ""}
       ${posts.length ? `<div class="section"><div class="section-head"><div class="overline">Posts</div><a class="link" href="forum.html" style="font-size:14px">See all</a></div>
-        <div class="card" style="padding:0 16px">${posts.map((x) => `<div class="list-row"><div class="grow"><div class="type-label">${typeName(x.type)}</div><div class="truncate">${esc(x.body)}</div></div></div>`).join("")}</div></div>` : ""}
+        <div class="card list">${posts.map((x) => `<div class="list-row"><div class="grow"><div class="type-label">${typeName(x.type)}</div><div class="truncate">${esc(x.body)}</div></div></div>`).join("")}</div></div>` : ""}
     </div>`;
   }
   function expHTML(e) {
@@ -239,7 +287,7 @@
   function connectWithNote(p, prompt, done) {
     sheet({
       title: `Connect with ${p.first}`,
-      body: `<div class="card" style="background:var(--paper)"><p class="prompt-q">${esc(prompt.q)}</p><p style="margin:0" class="muted">${esc(prompt.a)}</p></div>
+      body: `<div class="card flat"><p class="prompt-q">${esc(prompt.q)}</p><p style="margin:0" class="muted">${esc(prompt.a)}</p></div>
         <label class="field" style="margin-top:16px"><span>Add a note (it becomes your first message)</span>
         <textarea class="textarea" data-note style="min-height:96px">That sounds great. How'd you get into it?</textarea></label>`,
       foot: `<button class="btn btn-primary btn-block" data-send>${icon("check")}Connect with note</button>`,
@@ -454,7 +502,7 @@
           <div class="section" style="margin-top:24px"><div class="overline">Refine</div><div class="chips">
             ${[["shorter", "Shorter"], ["detail", "More detail"], ["leadership", "Emphasize leadership"], ["technical", "Emphasize technical skills"]].map(([k, l]) => `<button class="chip ${st.variant === k ? "is-on" : ""}" data-variant="${k}">${l}</button>`).join("")}
           </div></div>
-          <details class="card" style="margin-top:24px"><summary class="overline" style="margin:0;cursor:pointer">Your words</summary><p class="serif" style="font-style:italic;color:var(--ink-muted);margin:8px 0 0">${esc(st.text)}</p></details>
+          <details class="card" style="margin-top:24px"><summary class="overline" style="margin:0;cursor:pointer">Your words</summary><p class="serif" style="font-style:var(--prompt-style);font-weight:var(--prompt-weight);color:var(--ink-muted);margin:8px 0 0">${esc(st.text)}</p></details>
           <div class="list-row" style="margin-top:16px;border:0"><div class="grow"><div style="font-weight:500">Show on my profile</div><div class="meta">Connections and people you meet will see this</div></div><label class="switch"><input type="checkbox" data-show ${st.show ? "checked" : ""}><span></span></label></div>
         </div>`;
         foot.innerHTML = `<button class="btn btn-secondary" data-copy>${icon("copy")}Copy</button><button class="btn btn-primary" data-save>Save experience</button>`;
@@ -491,18 +539,31 @@
     return pg;
   }
 
+  /* The card is a glance, not a dossier: identity, the Now/Dream pair, at most
+     the top goal, and one prompt. The bio lives on the full profile a tap away;
+     repeating it here is what made the card unreadable. Goals are capped at one
+     because two wrap to a second line on longer pairs, which made card heights
+     jump around the deck.
+
+     Three bands, in descending order of how fast they can be read: who this is,
+     the two facts that decide a swipe, and the prompt that gives them a voice.
+     The identity band runs horizontally and the goal rides under the name, both
+     to buy back the vertical space the fixed-height deck does not have. */
   function swipeCardHTML(p, behind) {
     const pr = p.prompts[0];
+    const goal = p.goals[0];
     return `<article class="swipe-card ${behind ? "is-behind" : ""}" data-id="${p.id}">
       <span class="swipe-label pass">Pass</span><span class="swipe-label connect">Connect</span>
-      ${avatar(p, "lg")}
-      <h2 class="display" style="margin-top:16px">${esc(fullName(p))}</h2>
-      <div class="meta" style="margin:4px 0 16px">${esc(p.year)} · ${esc(p.major)}</div>
-      <div class="titles"><div><div class="overline">Now</div><div>${esc(p.now)}</div></div><div><div class="overline">Dream</div><div>${esc(p.dream)}</div></div></div>
-      <div class="chips" style="margin:16px 0 12px">${p.goals.map((g) => `<span class="chip static">${esc(g)}</span>`).join("")}</div>
-      <p class="bio" style="margin:0 0 16px">${esc(p.bio)}</p>
-      ${pr ? `<p class="prompt-q">${esc(pr.q)}</p><p style="margin:0">${esc(pr.a)}</p>` : ""}
-      <div class="fade-out"><span>${icon("chevrons-down")}Tap for full profile</span></div>
+      <header class="card-id">
+        ${avatar(p, "lg")}
+        <div class="txt">
+          <h2 class="card-name">${esc(fullName(p))}</h2>
+          <div class="meta card-sub">${esc(p.year)} · ${esc(p.major)}</div>
+          ${goal ? `<div class="chips card-tag"><span class="chip static static-on sm">${esc(goal)}</span></div>` : ""}
+        </div>
+      </header>
+      ${dataPanel([["Now", p.now], ["Dream", p.dream]])}
+      ${pr ? `<div class="card-prompt"><p class="prompt-q">${esc(pr.q)}</p><p class="card-answer">${esc(pr.a)}</p></div>` : ""}
     </article>`;
   }
 
@@ -537,8 +598,8 @@
   /* ---------- Expose ---------- */
   window.App = {
     D, Store, $, $$, esc, icon, icons, param, person, fullName, initials, avatar, isConnected, isPending,
-    init, toast, sheet, actionSheet, page, refreshTabbar,
-    profileBody, expHTML, openProfile, openResume, reportBlock, connect, connectionMoment, ensureThread,
+    init, toast, sheet, actionSheet, page, refreshTabbar, segmented,
+    profileBody, expHTML, dataPanel, openProfile, openResume, reportBlock, connect, connectionMoment, ensureThread,
     allPosts, typeName, prefsHTML, bindPrefs, openPrefs, chipPicker, openTranslator, pickPrompt, answerPrompt, swipeCardHTML,
   };
 })();

@@ -38,20 +38,31 @@ It is a clickable demo, not a working product. It needs to show clearly:
 | **Substance over looks** | Photos stay hidden until two people match. Cards lead with goals, titles and experiences. |
 | **Everything is a conversation starter** | Prompts, experiences and posts are written so someone can reply to them. |
 | **Nudge, don't nag** | The app suggests coffee chats and events gently, with no pressure, streaks or guilt. |
-| **Calm, editorial, readable** | One idea per screen, generous whitespace, a clear type hierarchy, one accent color. |
+| **Calm, readable, uncluttered** | One idea per screen, generous whitespace, a clear type hierarchy, one accent color. |
 | **Career language made easy** | The app does the hard wording work so students can focus on what they did. |
 
 ---
 
 ## 3. Visual Design System
 
-### Direction: warm editorial
-The app should feel like a well-designed magazine: warm paper tones, confident serif headlines, calm sans-serif body text, and a single deep accent. It should read as **thoughtful and grown-up**, the opposite of loud, gamified or party-coded.
+### Direction: Court
+Neutral monochrome surfaces, one saturated raspberry accent, a grotesque
+display face and softly rounded, gently elevated cards. Everything on screen is
+grey except the accent, so the accent carries all the emphasis on its own. It should read as
+**current and confident**: professional without the magazine costume, and
+recognisably built for students rather than for a careers office.
+
+*Chosen September 2026, replacing an earlier warm-editorial direction (warm
+paper, Newsreader serif, evergreen accent) that read as too serious for the
+audience. That direction is preserved as `[data-theme="editorial"]` in
+`demo/css/themes.css`, along with three other candidates (Signal, Nightshift,
+Grove), so the choice can be shown against what it replaced. Press `T` in the
+demo to open the comparison panel, or link one with `?theme=signal`.*
 
 ### Inspirations (and what to borrow)
 | App | What to borrow |
 |---|---|
-| **Hinge** | Prompt cards, the "Likes you" list, serif-forward editorial feel, commenting on a specific part of a profile. |
+| **Hinge** | Prompt cards, the "Likes you" list, commenting on a specific part of a profile. |
 | **Bumble BFF / Bizz** | Platonic and professional framing of swipe matching; clear "this isn't dating" tone. |
 | **Read.cv / Posts.cv** | Profile as a clean, typographic resume; experiences laid out like a portfolio. |
 | **Threads** | Minimal, text-first feed; thin dividers instead of heavy cards; quiet action icons. |
@@ -60,56 +71,72 @@ The app should feel like a well-designed magazine: warm paper tones, confident s
 | **Lunchclub** | The idea of the coffee chat as the goal of every match. |
 
 ### Color palette
-No ASU maroon or gold. One accent, used sparingly for primary actions and key moments.
+No ASU maroon or gold. One accent, used sparingly for primary actions and key
+moments. Every pair below meets WCAG AA (4.5:1) in the combinations the UI
+actually uses.
 
 | Token | Hex | Use |
 |---|---|---|
-| **Paper** | `#F7F3EC` | App background |
-| **Surface** | `#FFFDF9` | Cards, sheets, input fields |
-| **Ink** | `#1C1A17` | Headlines, primary text, primary icons |
-| **Ink Muted** | `#6B655C` | Secondary text, metadata, placeholder text |
-| **Hairline** | `#E6DFD3` | Dividers, card borders |
-| **Evergreen** (accent) | `#2F4F43` | Primary buttons, active states, links, the "Connect" action |
-| **Evergreen Soft** | `#DCE6DF` | Selected chips, tag backgrounds, highlighted cards |
-| **Clay** (secondary) | `#B5654A` | Rare emphasis only: the match moment, "Likes you" count |
-| **Sand** | `#EFE7DA` | Subtle section backgrounds (Experience Translator, event strip) |
-| **Error** | `#A8402F` | Errors and destructive actions |
+| **Paper** | `#F2F2F1` | App background |
+| **Surface** | `#FCFCFB` | Cards, sheets, input fields |
+| **Ink** | `#171717` | Headlines, primary text, primary icons |
+| **Ink Muted** | `#636363` | Secondary text, metadata, placeholder text |
+| **Hairline** | `#E2E2E1` | Dividers, card borders |
+| **Raspberry** (accent) | `#BE2853` | Primary buttons, active states, links, the "Connect" action |
+| **Raspberry Soft** | `#FBE3EB` | Selected chips, tag backgrounds, highlighted cards |
+| **Accent Ink** | `#FFFBFC` | Text on the accent |
+| **Graphite** (secondary) | `#262626` | Rare emphasis only: the match moment, "Likes you" count |
+| **Sand** | `#EAEAE8` | Subtle section backgrounds (Experience Translator, event strip) |
+| **Error** | `#B3261E` | Errors and destructive actions |
 
 **Rules**
-- About 90% of any screen is Paper, Surface and Ink. Evergreen appears only on what matters.
-- Clay is a spice. It appears in at most one place per screen.
-- No gradients, glows or drop-shadow stacks. At most one soft shadow on floating elements (swipe card, compose button).
+- Ink Muted is `#636363` rather than a lighter grey because it has to clear AA on Sand, which now backs the inset data panels as well as section bands. Every theme holds the same invariant.
+- About 90% of any screen is Paper, Surface and Ink. Raspberry appears only on what matters.
+- Graphite is the spice, and it is deliberately neutral: the page has one accent and no competing second hue. It appears in at most one place per screen.
+- No gradients or glows. Elevation is the one exception to the flatness rule, and it is deliberately faint: a card carries two wide, very low-alpha shadow layers (no tight contact layer, so there is no hard edge), and floating elements (swipe card, compose button) carry a slightly stronger version of the same pair. The shadow should read as the card sitting in light, never as an outline drawn underneath it. Two layers describe one light source; anything beyond that is decoration.
+- The landing page mirrors these tokens and adds a dark set, where the accent lifts to `#EC5B86` to stay legible on a dark surface.
 
 ### Typography
 | Role | Typeface | Size / weight | Notes |
 |---|---|---|---|
-| Display (names, big headings) | **Newsreader** (serif) | 32 / Medium | Slightly tight letter-spacing |
-| Title (screen titles) | Newsreader | 24 / Medium | |
-| Prompt question | Newsreader | 18 / Regular Italic | Gives prompts a "magazine pull-quote" feel |
-| Body | **Instrument Sans** | 16 / Regular | Line height 1.5 |
-| Label / button | Instrument Sans | 15 / Medium | |
-| Meta (year, time, tags) | Instrument Sans | 13 / Regular, Ink Muted | |
-| Overline (section labels) | Instrument Sans | 12 / Medium, uppercase, +6% tracking | E.g., "EXPERIENCES", "GOALS" |
+| Display (names, big headings) | **Bricolage Grotesque** | 32 / Bold | Tight letter-spacing, -3% |
+| Title (screen titles) | Bricolage Grotesque | 24 / Bold | |
+| Prompt question | Bricolage Grotesque | 18 / Semibold | Carries its pull-quote role with weight, not italic |
+| Body | **Geist** | 16 / Regular | Line height 1.5 |
+| Label / button | Geist | 15 / Medium | |
+| Meta (year, time, tags) | Geist | 13 / Regular, Ink Muted | |
+| Overline (section labels) | Geist | 12 / Medium, uppercase, +6% tracking | E.g., "EXPERIENCES", "GOALS" |
 
-Both fonts are free (Google Fonts). Use the serif only for names, headings and prompt questions, never for body text or buttons.
+Both fonts are free (Google Fonts). Use the display face only for names,
+headings and prompt questions, never for body text or buttons.
+
+Bricolage Grotesque has no true italic, so nothing in display type is
+italicised: a synthesised slant on a grotesque reads as a rendering fault.
+Where display type needs emphasis, it takes the accent colour instead. Body
+copy set in Geist keeps real italics.
 
 ### Layout and shape
 - **Spacing:** 8-point grid; 20px side margins; 24–32px between sections.
-- **Corner radius:** 20px for swipe cards and sheets, 14px for content cards, 12px for inputs, fully rounded (pill) for buttons and chips.
-- **Borders over shadows:** Cards use a 1px Hairline border. Only the swipe card and floating buttons get a soft shadow.
+- **Corner radius:** surfaces are softly rounded, interactive controls are pills. 20px for swipe cards and sheets, 14px for content cards, 12px for inputs, 10px for panels inset inside a card, 18px for message bubbles, fully rounded (pill) for buttons, chips and the segmented control. A nested surface sits one step tighter than the surface holding it, so a panel inside a card reads as nested rather than as a second card.
+- **Elevation over borders:** a card is separated from the page by light, not by a line — `--shadow-card`, with `--card-ring` transparent. Hairlines stay, but only *inside* a card, dividing its bands. The exception is Nightshift: a dark shadow on a dark page reads as nothing, so there `--card-ring` is visible and the lifted surface does the work.
 - **Icons:** Thin, outline icon set (e.g., Phosphor "Light" or Lucide at 1.5px stroke). Active tab icons switch to filled.
-- **Avatars:** Before a match, people appear as a **monogram tile**: initials in Newsreader on a softly tinted square. After matching, the real photo replaces it.
+- **Avatars:** Before a match, people appear as a **monogram tile**: initials in Bricolage Grotesque on a softly tinted square. The five tints are greys with a whisper of hue, so tiles vary without introducing a second accent. After matching, the real photo replaces it.
 
 ### Components
-- **Primary button:** Evergreen pill, Surface text, full width at the bottom of flows.
+- **Primary button:** Raspberry pill, Accent Ink text, full width at the bottom of flows.
 - **Secondary button:** Transparent with 1px Ink border.
-- **Tertiary:** Text-only link in Evergreen.
-- **Chips:** Pill, Hairline border; selected state fills Evergreen Soft with Evergreen text.
+- **Tertiary:** Text-only link in Raspberry.
+- **Chips:** Pill, Hairline border; selected state fills Raspberry Soft with Raspberry text.
+- **Card anatomy:** every card that describes a person uses the same three parts, so the deck card, the Likes cell and the full profile state things the same way.
+  - *Identity band* (`.card-id`) — avatar at the left, name / role / status stacked beside it. Horizontal, because stacking under a centred avatar costs vertical space the fixed-height deck does not have.
+  - *Data panel* (`.data-panel`) — grouped facts on their own Sand surface inset inside the card, small muted label above a larger dark value. Used for the Now/Dream pair everywhere it appears. Facts get a surface instead of floating under a rule; this is the single move that does the most for a dense card's readability.
+  - *Bands divided by hairlines* — the prompt sits under a rule rather than being one more paragraph in the stack.
+- **Action hierarchy:** one primary per surface. Everything else is a secondary outline, a quiet icon button or a plain text link. Never two buttons of equal weight.
 - **Bottom sheets:** Surface, 20px top radius, small grab handle, dimmed background behind.
 - **Toasts:** Ink background, Surface text, bottom of screen above the tab bar, auto-dismiss.
 
 ### Motion
-- Swipe cards follow the finger and tilt slightly (max ~8°). A small word label fades in: **"Connect"** (Evergreen, right) or **"Pass"** (Ink Muted, left).
+- Swipe cards follow the finger and tilt slightly (max ~8°). A small word label fades in: **"Connect"** (Raspberry, right) or **"Pass"** (Ink Muted, left).
 - Screens push and slide; sheets rise with a soft spring.
 - The match moment is the only "celebration" animation: two tiles slide together and the photos fade in.
 - Nothing bounces, sparkles or uses confetti.
@@ -281,14 +308,14 @@ Each screen below lists **purpose**, **layout (top to bottom)**, **interactions*
 ### 6.1 Onboarding
 
 Onboarding is one question per screen, like Hinge. Every screen has:
-- A thin progress bar at the top (Evergreen on Hairline).
+- A thin progress bar at the top (Raspberry on Hairline).
 - A back arrow at top left.
-- A large Newsreader question as the headline.
+- A large Bricolage Grotesque question as the headline.
 - The primary button pinned to the bottom ("Continue"), disabled until the step is complete.
 
 #### O1. Welcome
 - **Purpose:** First impression; set the tone.
-- **Layout:** Paper background. Centered small wordmark ("[App Name]") at top. Large Newsreader headline in the middle: **"Meet the people who'll shape your career."** One line of muted body text below: "A professional network, built by and for ASU students." Primary button: **"Continue with ASU email."** Tertiary link: "How it works."
+- **Layout:** Paper background. Centered small wordmark ("[App Name]") at top. Large Bricolage Grotesque headline in the middle: **"Meet the people who'll shape your career."** One line of muted body text below: "A professional network, built by and for ASU students." Primary button: **"Continue with ASU email."** Tertiary link: "How it works."
 - **Notes:** No illustrations or stock photos. A simple typographic moment. Optionally, a slow fade cycling through three sample prompt snippets beneath the headline.
 
 #### O2. ASU email → Verify
@@ -304,14 +331,14 @@ Onboarding is one question per screen, like Hinge. Every screen has:
 
 #### O5. Goals
 - **Layout:** Headline "What brings you here?" · Subtext "Pick up to three." · Wrap of large chips: Networking · Career development · Entrepreneurship · Finding a mentor · Being a mentor · Study partners · Finding co-founders · Exploring majors.
-- **Interactions:** Selected chips fill Evergreen Soft with a small check.
+- **Interactions:** Selected chips fill Raspberry Soft with a small check.
 
 #### O6. Bio
 - **Layout:** Headline "Introduce yourself in a few lines." · Multi-line text box with a 250-character counter · A collapsible "Need inspiration?" link revealing two short example bios.
 
 #### O7. Prompts
 - **Layout:** Headline "Show them what you've done." · Two empty prompt slots ("Choose a prompt"), plus an optional third.
-- **Interactions:** Tapping a slot opens the **Prompt Picker** (sheet): a list of prompts grouped as **Experience** and **Personality**. Choosing one opens the answer screen: prompt in Newsreader italic at top, answer box (or photo picker for photo prompts), a small hint line (e.g., "Strong answers mention what you did and what changed because of it.").
+- **Interactions:** Tapping a slot opens the **Prompt Picker** (sheet): a list of prompts grouped as **Experience** and **Personality**. Choosing one opens the answer screen: prompt in Bricolage Grotesque Semibold at top, answer box (or photo picker for photo prompts), a small hint line (e.g., "Strong answers mention what you did and what changed because of it.").
 - **Prompt library (sample):**
   - Experience: "My favorite career experience so far…" · "The project I'm most proud of…" · "My favorite internship taught me…" · "A photo that sums up my work experience" (photo) · "A problem I solved that nobody asked me to…" · "The class that changed how I think…"
   - Personality: "The best advice I've gotten…" · "You'll get along with me if…" · "My ideal coffee chat covers…" · "I'm currently learning…" · "Ask me about…"
@@ -343,18 +370,18 @@ Onboarding is one question per screen, like Hinge. Every screen has:
   1. **Header:** Wordmark at left; at right a **preferences icon** (sliders).
   2. **Segmented control:** "Discover" | "Likes you" with a small Clay count badge (e.g., "Likes you · 4").
   3. **The card** (fills most of the screen, Surface, 20px radius, soft shadow, second card peeking slightly behind it):
-     - **Top block:** monogram tile (large, tinted), then **Name** in Newsreader Display, then a meta line: *Junior · Supply Chain Management*.
+     - **Top block:** monogram tile (large, tinted), then **Name** in Bricolage Grotesque, then a meta line: *Junior · Supply Chain Management*.
      - **Titles:** "Now: Operations Intern, Local Startup" / "Dream: Head of Operations" (overline labels NOW / DREAM in muted caps).
      - **Goals:** 1–3 chips.
      - **Bio:** First two lines, fading out.
      - **First prompt preview:** prompt question in italic serif, answer in body text.
      - A subtle "Scroll for more" affordance at the bottom edge.
-  4. **Action row** (below the card): circular **Pass** button (X, outline, Ink Muted) and a larger circular **Connect** button (Evergreen fill, handshake or check icon). A small undo arrow sits at the far left, enabled only after a Pass.
+  4. **Action row** (below the card): circular **Pass** button (X, outline, Ink Muted) and a larger circular **Connect** button (Raspberry fill, handshake or check icon). A small undo arrow sits at the far left, enabled only after a Pass.
 - **Interactions:**
   - Swipe right → "Connect" label fades in on the card; release to connect.
   - Swipe left → "Pass" label; release to pass.
   - Scroll inside the card (or tap it) to open the **Full profile**.
-- **End of deck:** Newsreader line "You've seen everyone for now." Muted subtext: "New students join every day. Meanwhile, see what's happening in the Forum." Secondary button: "Go to Forum."
+- **End of deck:** Bricolage Grotesque line "You've seen everyone for now." Muted subtext: "New students join every day. Meanwhile, see what's happening in the Forum." Secondary button: "Go to Forum."
 
 #### 6.2.2 Full profile (shared view)
 Used from the deck, Likes you, Search, Forum and Messages. The same layout keeps the app predictable.
@@ -382,7 +409,7 @@ Used from the deck, Likes you, Search, Forum and Messages. The same layout keeps
 
 #### 6.2.4 Connection moment (full-screen popup)
 - **Purpose:** The one emotional peak in the app.
-- **Layout:** Paper background. Two rounded photo tiles slide toward each other and slightly overlap; photos fade in from monograms (**the photo reveal**). Headline in Newsreader: **"You and Maya connected."** Subtext pulled from their overlap: "You're both into entrepreneurship." Primary: **"Say hi."** Tertiary: "Keep swiping."
+- **Layout:** Paper background. Two rounded photo tiles slide toward each other and slightly overlap; photos fade in from monograms (**the photo reveal**). Headline in Bricolage Grotesque: **"You and Maya connected."** Subtext pulled from their overlap: "You're both into entrepreneurship." Primary: **"Say hi."** Tertiary: "Keep swiping."
 - **Notes:** A thin Clay underline under the headline is the only accent. No confetti.
 
 #### 6.2.5 Likes you
@@ -397,27 +424,27 @@ Used from the deck, Likes you, Search, Forum and Messages. The same layout keeps
 #### 6.3.1 Feed
 - **Purpose:** Community conversation and discovery beyond one-on-one matching.
 - **Layout (top to bottom):**
-  1. **Header:** "Forum" in Newsreader Title.
+  1. **Header:** "Forum" in Bricolage Grotesque Title.
   2. **Filter row** (horizontal scroll of chips): All · Questions · Opportunities · Study groups · Events · then the user's followed tags (e.g., #CSE205, #startups).
   3. **Campus events strip** (Sand background band): overline "HAPPENING AT ASU," then horizontally scrolling compact event cards: date block (e.g., "SEP 29"), event name, place, "3 connections interested."
   4. **Posts**, separated by Hairline dividers (Threads-style, not boxed cards):
      - Monogram (or photo if connected) · **Name** · Year · Major · time ("2h")
      - **Type label** as a small uppercase tag for non-standard posts (QUESTION, OPPORTUNITY, STUDY GROUP)
      - Body text; optional photo (rounded 14px)
-     - Tags in Evergreen text
+     - Tags in Raspberry text
      - Action row: Reply (count) · Helpful / Appreciate (count) · Save. All icons thin and muted.
-  5. **Floating "New post" button:** Evergreen pill with a pencil icon and the word "Post," bottom right above the tab bar.
+  5. **Floating "New post" button:** Raspberry pill with a pencil icon and the word "Post," bottom right above the tab bar.
 - **Type-specific post designs:**
   - **Question:** When answered, shows a small "✓ Answered" label and a preview of the pinned answer.
   - **Opportunity:** Contained in a Surface card with a Hairline border: role, organization, deadline ("Apply by Oct 10"), and an **"Interested"** button. Interested students are visible to the poster, who can message them.
   - **Study group:** Class code as a bold chip (MAT 265), "Meets weekly · Tempe library," member monograms stacked, **"Join"** button. Joining adds you to a group chat in Messages.
 
 #### 6.3.2 Post detail
-- **Layout:** Full post at top, then replies in a simple thread (one level of nesting). For Questions, the pinned **Best answer** sits first with a soft Evergreen Soft background. Reply composer fixed at bottom.
+- **Layout:** Full post at top, then replies in a simple thread (one level of nesting). For Questions, the pinned **Best answer** sits first with a soft Raspberry Soft background. Reply composer fixed at bottom.
 - **Interactions:** Tap any name/avatar → Full profile. Question authors can pin a reply via its overflow menu.
 
 #### 6.3.3 Event detail (bottom sheet)
-- **Layout:** Date block + event title (Newsreader), host ("ASU Career Services"), time, location, a 2–3 line description. Row: "Maya, Jordan and 12 others are interested" with monograms. Buttons: **"I'm interested"** (primary) and "Add to calendar" (secondary).
+- **Layout:** Date block + event title (Bricolage Grotesque), host ("ASU Career Services"), time, location, a 2–3 line description. Row: "Maya, Jordan and 12 others are interested" with monograms. Buttons: **"I'm interested"** (primary) and "Add to calendar" (secondary).
 - **Notes:** This is where the "ASU has resources" message is strongest. Events feel social, not like a bulletin board.
 
 #### 6.3.4 New post (full-screen sheet)
@@ -443,7 +470,7 @@ Used from the deck, Likes you, Search, Forum and Messages. The same layout keeps
 #### 6.4.2 Results
 - **Layout:** Segmented control **People | Posts** under the search field.
 - **People:** Filter chips row (Major · Year · Goals, each opening a small sheet). Result rows: monogram, **Name**, "Now/Dream" title on one line, year · major in muted text, and a quiet "Connected" label where relevant. Tap → Full profile (with Message, Connect, Posts).
-- **Posts:** Same post styling as the Forum feed, with search terms subtly highlighted in Evergreen Soft.
+- **Posts:** Same post styling as the Forum feed, with search terms subtly highlighted in Raspberry Soft.
 - **Empty state:** "No results for 'xyz'. Try a class code or a major."
 
 ---
@@ -460,13 +487,13 @@ Used from the deck, Likes you, Search, Forum and Messages. The same layout keeps
 
 #### 6.5.2 Chat
 - **Layout:** Header with back arrow, photo/monogram, name, and "Junior · Supply Chain" in muted text. Tap the header → Full profile. Overflow → Report / Block.
-- **Messages:** Outgoing bubbles in Evergreen with Surface text; incoming bubbles in Surface with a Hairline border. Rounded 18px, grouped by time.
+- **Messages:** Outgoing bubbles in Raspberry with Surface text; incoming bubbles in Surface with a Hairline border. Rounded 14px, grouped by time.
 - **Composer:** Rounded input with photo icon and send arrow.
 
 #### 6.5.3 Coffee-chat nudge card (inside a new connection's chat)
 - **When:** At the top of the chat, before either person has sent more than a couple of messages.
 - **Layout:** Sand card, 14px radius:
-  - Small coffee-cup icon + Newsreader line **"Grab coffee?"**
+  - Small coffee-cup icon + Bricolage Grotesque line **"Grab coffee?"**
   - Muted text: "Most coffee chats take 20–30 minutes. Pick a spot on campus that works for both of you."
   - **CONVERSATION STARTERS:** 2–3 tappable suggestions based on their profile, e.g., "Ask about the robotics project she's most proud of" · "You both want to start a company. Compare notes."
   - Button: **"Suggest a coffee chat,"** which fills the composer with an editable message: "Hey Maya! Would you want to grab coffee on campus sometime this week?"
@@ -495,7 +522,7 @@ A focused, full-screen flow with a Sand background to set it apart.
 1. **Type:** Headline "What kind of experience is it?" · large tappable rows with icons: Job · Class project · Club or organization · Volunteering · Personal project · Other.
 2. **Basics:** Role/title, Organization or class, Start and end (month + year, or "Current").
 3. **Describe it:** Headline "Tell us what you did, in your own words." · large text box · rotating hint below: "What did you do day to day? What are you proud of? Did anything get better because of you?" · a small example link.
-4. **Translating (brief loading state):** Newsreader line "Finding the right words…" with a thin progress line. About 1.5 seconds.
+4. **Translating (brief loading state):** Bricolage Grotesque line "Finding the right words…" with a thin progress line. About 1.5 seconds.
 5. **Results:**
    - Overline: **YOUR EXPERIENCE, TRANSLATED**
    - 3–4 bullet points on a Surface card, each editable by tapping. Example for a campus coffee-shop job:
@@ -563,4 +590,4 @@ A 3–4 minute path that tells the story:
 - **Simulated:** ASU sign-in and code verification, matching logic, "Likes you" list, messages (pre-scripted replies), Experience Translator output (pre-written), event data, search results.
 - **Clickable only:** the main walkthrough path above should be fully tappable; secondary screens can be static.
 - **Out of scope:** real accounts, notifications, moderation tools, live AI, calendar integration.
-- **Possible future ideas** (mention verbally, not in the prototype): "We met" follow-ups after coffee chats, integration with ASU Handshake or the career center, mentor programs pairing upperclassmen with freshmen, optional dark mode using the same palette inverted (Ink background, Paper text, lighter Evergreen accent).
+- **Possible future ideas** (mention verbally, not in the prototype): "We met" follow-ups after coffee chats, integration with ASU Handshake or the career center, mentor programs pairing upperclassmen with freshmen, optional dark mode using the same palette inverted (Ink background, Paper text, lighter Raspberry accent (#EC5B86, as the landing page already defines)).

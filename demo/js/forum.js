@@ -56,7 +56,7 @@
         <div class="list-row">${icon("clock")}<span>${esc(e.time)}</span></div>
         <div class="list-row">${icon("map-pin")}<span>${esc(e.place)}</span></div>
         <p style="margin:16px 0">${esc(e.desc)}</p>
-        ${names.length ? `<div class="card" style="display:flex;align-items:center;gap:12px;background:var(--paper)"><span class="stack">${e.interested.map((pid) => avatar(person(pid), "sm")).join("")}</span>
+        ${names.length ? `<div class="card flat" style="display:flex;align-items:center;gap:12px"><span class="stack">${e.interested.map((pid) => avatar(person(pid), "sm")).join("")}</span>
           <span style="font-size:14px">${esc(names.slice(0, 2).join(", "))}${names.length > 2 ? ` and ${names.length - 2 + e.others} others` : ` and ${e.others} others`} are interested</span></div>` : `<p class="meta">${e.others} students are interested.</p>`}`,
       foot: `<div style="display:flex;gap:12px"><button class="btn btn-secondary" style="flex:1" data-cal>${icon("calendar-plus")}Add to calendar</button>
         <button class="btn ${on ? "btn-secondary is-on" : "btn-primary"}" style="flex:1" data-int>${on ? icon("check") + "Interested" : "I'm interested"}</button></div>`,

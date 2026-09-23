@@ -42,7 +42,7 @@
         ${s.recentSearches.length ? `<div class="section" style="margin-top:24px"><div class="overline">Recent</div>${s.recentSearches.map((r, i) => `<div class="list-row"><span class="muted">${icon("history")}</span><button class="grow" style="text-align:left" data-q="${esc(r)}">${esc(r)}</button><button class="icon-btn" data-rm="${i}" aria-label="Remove">${icon("x")}</button></div>`).join("")}</div>` : ""}
         <div class="section" style="margin-top:24px"><div class="overline">Suggested tags</div><div class="chips">${["#internships", "#CSE205", "#startups", "#resume", "#research"].map((t) => `<button class="chip" data-q="${t}">${t}</button>`).join("")}</div></div>
         <div class="section" style="margin-top:24px"><div class="overline">People with your goals</div>
-          <div class="chips scroll" style="padding-bottom:4px">${suggested.map((p) => `<button class="card" data-person="${p.id}" style="width:132px;flex:none;margin:0;text-align:left">${avatar(p)}<div class="serif" style="font-weight:500;margin-top:8px;line-height:1.2">${esc(fullName(p))}</div><div class="meta truncate">${esc(p.major)}</div></button>`).join("")}</div></div>
+          <div class="chips scroll">${suggested.map((p) => `<button class="card mini-card" data-person="${p.id}">${avatar(p, "lg")}<div class="nm">${esc(fullName(p))}</div><div class="meta truncate">${esc(p.major)}</div></button>`).join("")}</div></div>
       </div>`;
     } else {
       const P = people(), T = posts();
@@ -75,6 +75,7 @@
   }
 
   function bind() {
+    App.segmented(".segmented", "search-tab");
     const input = $("[data-input]");
     input.oninput = () => { setQuery(input.value, false); render(true); };
     input.onkeydown = (e) => { if (e.key === "Enter") { setQuery(input.value, true); input.blur(); } };
