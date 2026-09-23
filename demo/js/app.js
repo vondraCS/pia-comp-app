@@ -491,18 +491,21 @@
     return pg;
   }
 
+  /* The card is a glance, not a dossier: identity, the Now/Dream pair, at most
+     the top goal, and one prompt. The bio lives on the full profile a tap away;
+     repeating it here is what made the card unreadable. Goals are capped at one
+     because two wrap to a second line on longer pairs, which made card heights
+     jump around the deck. */
   function swipeCardHTML(p, behind) {
     const pr = p.prompts[0];
     return `<article class="swipe-card ${behind ? "is-behind" : ""}" data-id="${p.id}">
       <span class="swipe-label pass">Pass</span><span class="swipe-label connect">Connect</span>
       ${avatar(p, "lg")}
-      <h2 class="display" style="margin-top:16px">${esc(fullName(p))}</h2>
-      <div class="meta" style="margin:4px 0 16px">${esc(p.year)} · ${esc(p.major)}</div>
+      <h2 class="display card-name">${esc(fullName(p))}</h2>
+      <div class="meta card-sub">${esc(p.year)} · ${esc(p.major)}</div>
       <div class="titles"><div><div class="overline">Now</div><div>${esc(p.now)}</div></div><div><div class="overline">Dream</div><div>${esc(p.dream)}</div></div></div>
-      <div class="chips" style="margin:16px 0 12px">${p.goals.map((g) => `<span class="chip static">${esc(g)}</span>`).join("")}</div>
-      <p class="bio" style="margin:0 0 16px">${esc(p.bio)}</p>
-      ${pr ? `<p class="prompt-q">${esc(pr.q)}</p><p style="margin:0">${esc(pr.a)}</p>` : ""}
-      <div class="fade-out"><span>${icon("chevrons-down")}Tap for full profile</span></div>
+      <div class="chips card-goals">${p.goals.slice(0, 1).map((g) => `<span class="chip static">${esc(g)}</span>`).join("")}</div>
+      ${pr ? `<div class="card-prompt"><p class="prompt-q">${esc(pr.q)}</p><p class="card-answer">${esc(pr.a)}</p></div>` : ""}
     </article>`;
   }
 

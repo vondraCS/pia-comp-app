@@ -36,13 +36,12 @@
       }
     } else {
       body = likes.length
-        ? `<div class="pad"><h2 class="title" style="font-size:20px;margin:16px 0">${likes.length} ${likes.length === 1 ? "person wants" : "people want"} to connect with you.</h2>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-bottom:24px">
-            ${likes.map((id) => { const p = person(id); return `<button class="card" data-like="${id}" style="text-align:left;display:flex;flex-direction:column;gap:6px;margin:0">
-              ${avatar(p)}<div class="serif" style="font-size:18px;font-weight:500;line-height:1.2;margin-top:6px">${esc(fullName(p))}</div>
-              <div class="meta">${esc(p.year)} · ${esc(p.major)}</div>
-              <div style="font-size:13px"><span class="overline" style="font-size:10px">Dream</span><br>${esc(p.dream)}</div>
-              <span class="chip static static-on" style="min-height:26px;font-size:12px;align-self:flex-start;margin-top:4px">${esc(p.goals[0])}</span></button>`; }).join("")}
+        ? `<div class="pad"><h2 class="title likes-head">${likes.length} ${likes.length === 1 ? "person wants" : "people want"} to connect with you.</h2>
+            <div class="likes-grid">
+            ${likes.map((id) => { const p = person(id); return `<button class="card like-cell" data-like="${id}">
+              ${avatar(p, "lg")}
+              <div class="like-name">${esc(fullName(p))}</div>
+              <div class="meta">${esc(p.year)} · ${esc(p.major)}</div></button>`; }).join("")}
             </div></div>`
         : `<div class="empty" style="padding-top:96px"><h2 class="title">No one yet.</h2><p>Great prompts get noticed. Want to polish yours?</p><a class="btn btn-secondary" href="profile.html">Edit prompts</a></div>`;
     }
