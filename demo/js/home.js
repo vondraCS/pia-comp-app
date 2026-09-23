@@ -41,7 +41,8 @@
             ${likes.map((id) => { const p = person(id); return `<button class="card like-cell" data-like="${id}">
               ${avatar(p, "lg")}
               <div class="like-name">${esc(fullName(p))}</div>
-              <div class="meta">${esc(p.year)} · ${esc(p.major)}</div></button>`; }).join("")}
+              <div class="meta">${esc(p.year)} · ${esc(p.major)}</div>
+              ${p.goals[0] ? `<div class="chips card-tag"><span class="chip static static-on sm">${esc(p.goals[0])}</span></div>` : ""}</button>`; }).join("")}
             </div></div>`
         : `<div class="empty" style="padding-top:96px"><h2 class="title">No one yet.</h2><p>Great prompts get noticed. Want to polish yours?</p><a class="btn btn-secondary" href="profile.html">Edit prompts</a></div>`;
     }

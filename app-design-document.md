@@ -47,8 +47,8 @@ It is a clickable demo, not a working product. It needs to show clearly:
 
 ### Direction: Court
 Neutral monochrome surfaces, one saturated raspberry accent, a grotesque
-display face and near-square cards. Everything on screen is grey except the
-accent, so the accent carries all the emphasis on its own. It should read as
+display face and softly rounded, gently elevated cards. Everything on screen is
+grey except the accent, so the accent carries all the emphasis on its own. It should read as
 **current and confident**: professional without the magazine costume, and
 recognisably built for students rather than for a careers office.
 
@@ -80,7 +80,7 @@ actually uses.
 | **Paper** | `#F2F2F1` | App background |
 | **Surface** | `#FCFCFB` | Cards, sheets, input fields |
 | **Ink** | `#171717` | Headlines, primary text, primary icons |
-| **Ink Muted** | `#6A6A6A` | Secondary text, metadata, placeholder text |
+| **Ink Muted** | `#636363` | Secondary text, metadata, placeholder text |
 | **Hairline** | `#E2E2E1` | Dividers, card borders |
 | **Raspberry** (accent) | `#BE2853` | Primary buttons, active states, links, the "Connect" action |
 | **Raspberry Soft** | `#FBE3EB` | Selected chips, tag backgrounds, highlighted cards |
@@ -90,9 +90,10 @@ actually uses.
 | **Error** | `#B3261E` | Errors and destructive actions |
 
 **Rules**
+- Ink Muted is `#636363` rather than a lighter grey because it has to clear AA on Sand, which now backs the inset data panels as well as section bands. Every theme holds the same invariant.
 - About 90% of any screen is Paper, Surface and Ink. Raspberry appears only on what matters.
 - Graphite is the spice, and it is deliberately neutral: the page has one accent and no competing second hue. It appears in at most one place per screen.
-- No gradients, glows or drop-shadow stacks. At most one soft shadow on floating elements (swipe card, compose button).
+- No gradients or glows. Elevation is the one exception to the flatness rule, and it is deliberately faint: a card carries two wide, very low-alpha shadow layers (no tight contact layer, so there is no hard edge), and floating elements (swipe card, compose button) carry a slightly stronger version of the same pair. The shadow should read as the card sitting in light, never as an outline drawn underneath it. Two layers describe one light source; anything beyond that is decoration.
 - The landing page mirrors these tokens and adds a dark set, where the accent lifts to `#EC5B86` to stay legible on a dark surface.
 
 ### Typography
@@ -116,8 +117,8 @@ copy set in Geist keeps real italics.
 
 ### Layout and shape
 - **Spacing:** 8-point grid; 20px side margins; 24–32px between sections.
-- **Corner radius:** surfaces are near-square, interactive controls are pills. 12px for swipe cards and sheets, 8px for content cards and inputs, 14px for message bubbles, fully rounded (pill) for buttons, chips and the segmented control.
-- **Borders over shadows:** Cards use a 1px Hairline border. Only the swipe card and floating buttons get a soft shadow.
+- **Corner radius:** surfaces are softly rounded, interactive controls are pills. 20px for swipe cards and sheets, 14px for content cards, 12px for inputs, 10px for panels inset inside a card, 18px for message bubbles, fully rounded (pill) for buttons, chips and the segmented control. A nested surface sits one step tighter than the surface holding it, so a panel inside a card reads as nested rather than as a second card.
+- **Elevation over borders:** a card is separated from the page by light, not by a line — `--shadow-card`, with `--card-ring` transparent. Hairlines stay, but only *inside* a card, dividing its bands. The exception is Nightshift: a dark shadow on a dark page reads as nothing, so there `--card-ring` is visible and the lifted surface does the work.
 - **Icons:** Thin, outline icon set (e.g., Phosphor "Light" or Lucide at 1.5px stroke). Active tab icons switch to filled.
 - **Avatars:** Before a match, people appear as a **monogram tile**: initials in Bricolage Grotesque on a softly tinted square. The five tints are greys with a whisper of hue, so tiles vary without introducing a second accent. After matching, the real photo replaces it.
 
@@ -126,7 +127,12 @@ copy set in Geist keeps real italics.
 - **Secondary button:** Transparent with 1px Ink border.
 - **Tertiary:** Text-only link in Raspberry.
 - **Chips:** Pill, Hairline border; selected state fills Raspberry Soft with Raspberry text.
-- **Bottom sheets:** Surface, 12px top radius, small grab handle, dimmed background behind.
+- **Card anatomy:** every card that describes a person uses the same three parts, so the deck card, the Likes cell and the full profile state things the same way.
+  - *Identity band* (`.card-id`) — avatar at the left, name / role / status stacked beside it. Horizontal, because stacking under a centred avatar costs vertical space the fixed-height deck does not have.
+  - *Data panel* (`.data-panel`) — grouped facts on their own Sand surface inset inside the card, small muted label above a larger dark value. Used for the Now/Dream pair everywhere it appears. Facts get a surface instead of floating under a rule; this is the single move that does the most for a dense card's readability.
+  - *Bands divided by hairlines* — the prompt sits under a rule rather than being one more paragraph in the stack.
+- **Action hierarchy:** one primary per surface. Everything else is a secondary outline, a quiet icon button or a plain text link. Never two buttons of equal weight.
+- **Bottom sheets:** Surface, 20px top radius, small grab handle, dimmed background behind.
 - **Toasts:** Ink background, Surface text, bottom of screen above the tab bar, auto-dismiss.
 
 ### Motion

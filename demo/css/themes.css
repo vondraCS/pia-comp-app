@@ -10,10 +10,12 @@
    tokens.css. The themes below are the alternates kept for comparison,
    including "editorial" which preserves the original warm-serif design.
 
-   Two invariants every theme must hold:
+   Three invariants every theme must hold:
      --accent-ink  is legible ON --accent AND ON --spice (both are used as
                    button/badge backgrounds).
      --accent      is legible ON --accent-soft (chips, pills, pinned replies).
+     --ink-muted   is legible ON --sand, which backs the inset data panels
+                   (.data-panel) inside cards.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -48,13 +50,17 @@
   --prompt-style: normal;
   --prompt-weight: 500;
 
-  --r-swipe: 16px;
-  --r-sheet: 16px;
-  --r-card: 12px;
-  --r-input: 10px;
-  --r-bubble: 16px;
+  --r-swipe: 20px;
+  --r-sheet: 20px;
+  --r-card: 14px;
+  --r-panel: 10px;
+  --r-input: 12px;
+  --r-bubble: 18px;
+  --card-pad: 20px;
 
-  --shadow-float: 0 8px 28px rgba(21, 24, 29, 0.10);
+  --card-ring: transparent;
+  --shadow-card: 0 4px 16px rgba(21, 24, 29, 0.025), 0 16px 48px rgba(21, 24, 29, 0.035);
+  --shadow-float: 0 6px 20px rgba(21, 24, 29, 0.035), 0 24px 64px rgba(21, 24, 29, 0.06);
   --bezel: #1B1E24;
   --desk-bg: #DBE0E7;
 }
@@ -95,11 +101,17 @@
   --r-swipe: 22px;
   --r-sheet: 22px;
   --r-card: 16px;
+  --r-panel: 11px;
   --r-input: 12px;
   --r-bubble: 20px;
+  --card-pad: 20px;
 
-  /* A dark UI reads elevation through a lifted surface, not a drop shadow. */
-  --shadow-float: 0 10px 30px rgba(0, 0, 0, 0.55);
+  /* A dark UI reads elevation through a lifted surface and a faint ring, not
+     through a drop shadow: black on near-black is invisible. This is the one
+     theme where --card-ring stays visible. */
+  --card-ring: var(--hairline);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.16), 0 16px 48px rgba(0, 0, 0, 0.20);
+  --shadow-float: 0 6px 20px rgba(0, 0, 0, 0.24), 0 24px 64px rgba(0, 0, 0, 0.34);
   --bezel: #2E343B;
   --desk-bg: #0B0D0F;
 
@@ -145,10 +157,14 @@
   --r-swipe: 20px;
   --r-sheet: 20px;
   --r-card: 16px;
+  --r-panel: 11px;
   --r-input: 14px;
   --r-bubble: 18px;
+  --card-pad: 20px;
 
-  --shadow-float: 0 8px 24px rgba(26, 30, 23, 0.10);
+  --card-ring: transparent;
+  --shadow-card: 0 4px 16px rgba(26, 30, 23, 0.025), 0 16px 48px rgba(26, 30, 23, 0.035);
+  --shadow-float: 0 6px 20px rgba(26, 30, 23, 0.035), 0 24px 64px rgba(26, 30, 23, 0.06);
   --bezel: #1A1E17;
   --desk-bg: #D5DACE;
 }
@@ -192,10 +208,14 @@
   --r-swipe: 20px;
   --r-sheet: 20px;
   --r-card: 14px;
+  --r-panel: 10px;
   --r-input: 12px;
   --r-bubble: 18px;
+  --card-pad: 20px;
 
-  --shadow-float: 0 8px 24px rgba(28, 26, 23, 0.08);
+  --card-ring: transparent;
+  --shadow-card: 0 4px 16px rgba(28, 26, 23, 0.025), 0 16px 48px rgba(28, 26, 23, 0.035);
+  --shadow-float: 0 6px 20px rgba(28, 26, 23, 0.035), 0 24px 64px rgba(28, 26, 23, 0.06);
   --bezel: #1C1A17;
   --desk-bg: #E4DED3;
 }

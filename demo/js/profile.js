@@ -28,20 +28,24 @@
     const saved = Object.values(s.postState).filter((x) => x.saved).length;
     const hidden = Object.assign({}, me, { photo: null });
 
-    const head = `<div class="pad"><div style="display:flex;gap:16px;align-items:center">
-        <div style="position:relative">${avatar(me, "xl")}<span style="position:absolute;right:-4px;bottom:-4px;width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--hairline);display:grid;place-items:center">${icon("lock", 'style="width:14px;height:14px"')}</span></div>
-        <div style="min-width:0"><span class="lock-label">${icon("eye-off")}Visible to connections only</span>
-          <h1 class="display" style="margin-top:4px">${esc(fullName(me))}</h1>
-          <div class="meta">${esc(me.year)} · ${esc(me.major)}</div></div></div>
-      <div class="titles" style="margin-top:16px"><div><div class="overline">Now</div><div>${esc(me.now)}</div></div><div><div class="overline">Dream</div><div>${esc(me.dream)}</div></div></div>
-      <div style="text-align:right;margin-top:4px">${editLink("basics")}</div></div>`;
+    const head = `<div class="pad"><div class="profile-head">
+        <header class="card-id">
+          <span class="avatar-lock">${avatar(me, "xl")}<i>${icon("lock")}</i></span>
+          <div class="txt">
+            <h1 class="card-name">${esc(fullName(me))}</h1>
+            <div class="meta card-sub">${esc(me.year)} · ${esc(me.major)}</div>
+            <div class="card-tag"><span class="lock-label">${icon("eye-off")}Visible to connections only</span></div></div>
+        </header>
+        ${App.dataPanel([["Now", me.now], ["Dream", me.dream]])}
+      </div>
+      <div style="text-align:right;margin-top:8px">${editLink("basics")}</div></div>`;
 
     const toggle = `<div class="pad" style="margin-top:8px"><div class="segmented"><button class="${mode === "edit" ? "is-on" : ""}" data-mode="edit">${icon("pencil", 'style="width:16px;height:16px"')}Edit</button><button class="${mode === "preview" ? "is-on" : ""}" data-mode="preview">${icon("eye", 'style="width:16px;height:16px"')}Preview</button></div></div>`;
 
     let body;
     if (mode === "preview") {
       body = `<div class="pad" style="margin-top:16px"><p class="meta" style="margin:0 0 12px">${icon("info", 'style="width:14px;height:14px;vertical-align:-2px"')} This is what other students see before you connect. Your photo stays hidden.</p></div>
-        <div class="deck" style="height:470px;margin-top:0">${App.swipeCardHTML(hidden)}</div>
+        <div class="deck" style="margin-top:0">${App.swipeCardHTML(hidden)}</div>
         <div class="pad" style="margin-top:32px"><div class="overline">Full profile</div></div>
         <div style="border-top:1px solid var(--hairline);padding-top:24px">${App.profileBody(hidden, { preview: true })}</div>`;
     } else {
@@ -59,7 +63,7 @@
           ${me.prompts.length < 2 ? `<button class="prompt-slot" data-add-prompt style="margin-top:12px">${icon("plus")}Choose a prompt</button>` : ""}</div>
 
         <div class="section"><div class="overline">Experiences</div>
-          ${me.experiences.length ? `<div class="card" style="padding:0 16px">${me.experiences.map((e, i) => App.expHTML(e).replace('<div class="exp">', `<div class="exp" data-exp="${i}">`).replace("</h4>", `</h4>${e.visible === false ? '<span class="meta">Hidden from profile</span>' : ""}`)).join("")}</div>` : ""}
+          ${me.experiences.length ? `<div class="card list">${me.experiences.map((e, i) => App.expHTML(e).replace('<div class="exp">', `<div class="exp" data-exp="${i}">`).replace("</h4>", `</h4>${e.visible === false ? '<span class="meta">Hidden from profile</span>' : ""}`)).join("")}</div>` : ""}
           <button class="add-row" data-translate><span class="plus">${icon("plus")}</span><span><b style="font-weight:500">Add experience</b><div class="meta">We'll help you put it into words.</div></span></button></div>
 
         <div class="section"><div class="section-head"><div class="overline">Resume</div></div>
@@ -69,7 +73,7 @@
           <div class="meta" style="margin-top:6px">${me.resume ? "Shown on your profile" : "Hidden from your profile"}</div></div>
 
         <div class="section"><div class="overline">My activity</div>
-          <div class="card" style="padding:0 16px">
+          <div class="card list">
             <button class="list-row" data-activity="posts">${icon("pen-line")}<span class="grow">My posts</span><span class="meta">${myPosts}</span>${icon("chevron-right", 'class="chev"')}</button>
             <button class="list-row" data-activity="saved">${icon("bookmark")}<span class="grow">Saved</span><span class="meta">${saved}</span>${icon("chevron-right", 'class="chev"')}</button>
           </div></div>
@@ -167,14 +171,14 @@
       title: "Settings",
       html: `<div class="pad">
         <div class="overline" style="margin-top:8px">Account</div>
-        <div class="card" style="padding:0 16px">${row("mail", `ASU email<div class="meta">${esc(s.me.first.toLowerCase())}.${esc(s.me.last.toLowerCase())}@asu.edu</div>`, "data-toast='Verified ASU account'")}${row("bell", "Notifications", "data-notif")}</div>
+        <div class="card list">${row("mail", `ASU email<div class="meta">${esc(s.me.first.toLowerCase())}.${esc(s.me.last.toLowerCase())}@asu.edu</div>`, "data-toast='Verified ASU account'")}${row("bell", "Notifications", "data-notif")}</div>
         <div class="overline" style="margin-top:24px">Preferences</div>
-        <div class="card" style="padding:0 16px">${row("sliders-horizontal", "Deck preferences", "data-prefs")}${row("file-text", "Resume visibility", "data-toast='Change this from the Resume section of your profile'", `<span class="meta">${s.me.resume ? "Shown" : "Hidden"}</span>`)}${row("ban", "Blocked users", "data-blocked", `<span class="meta">${s.blocked.length}</span>`)}</div>
+        <div class="card list">${row("sliders-horizontal", "Deck preferences", "data-prefs")}${row("file-text", "Resume visibility", "data-toast='Change this from the Resume section of your profile'", `<span class="meta">${s.me.resume ? "Shown" : "Hidden"}</span>`)}${row("ban", "Blocked users", "data-blocked", `<span class="meta">${s.blocked.length}</span>`)}</div>
         <div class="overline" style="margin-top:24px">Community</div>
-        <div class="card" style="padding:0 16px">${row("book-open", "Community guidelines", "data-guidelines")}</div>
-        <div class="card" style="padding:0 16px;margin-top:24px">${row("log-out", "Log out", "data-logout", "")}</div>
+        <div class="card list">${row("book-open", "Community guidelines", "data-guidelines")}</div>
+        <div class="card list" style="margin-top:24px">${row("log-out", "Log out", "data-logout", "")}</div>
         <div class="overline" style="margin-top:32px">Presenter</div>
-        <div class="card" style="padding:0 16px">${row("rotate-ccw", "Reset demo", "data-reset", "")}${row("play", "Replay onboarding", "data-onboard", "")}</div>
+        <div class="card list">${row("rotate-ccw", "Reset demo", "data-reset", "")}${row("play", "Replay onboarding", "data-onboard", "")}</div>
         <p class="meta" style="margin:12px 0 32px">Reset clears connections, messages, posts and experiences created during the demo.</p></div>`,
       onMount(root, close) {
         $$("[data-toast]", root).forEach((b) => (b.onclick = () => App.toast(b.dataset.toast)));
