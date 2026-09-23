@@ -134,7 +134,7 @@
   function renderWelcome() {
     const snippets = ["“The project I'm most proud of…”", "“My favorite internship taught me…”", "“Ask me about…”"];
     screen.innerHTML = `<div class="step">
-      <div style="text-align:center;padding-top:24px" class="wordmark">[App Name]</div>
+      <div style="text-align:center;padding-top:24px" class="wordmark">SunLinks</div>
       <div class="screen" style="display:grid;align-content:center;text-align:center">
         <h1 class="display" style="font-size:40px;margin-bottom:16px">Meet the people who'll shape your career.</h1>
         <p class="muted" style="margin:0 0 28px">A professional network, built by and for ASU students.</p>
