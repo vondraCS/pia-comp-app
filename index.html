@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url=landing/index.html">
+  <title>SunLinks</title>
+  <meta name="description" content="Match with ASU students on goals and experience, not photos.">
+  <meta name="color-scheme" content="light dark">
+  <!-- The site root only forwards: the landing page and the demo keep their
+       own directories so their relative asset paths stay intact. Tokens are
+       inlined from landing.css so the forward never flashes the wrong colour. -->
+  <style>
+    :root { color-scheme: light dark; --paper: #F2F2F1; --ink-muted: #636363; --accent: #BE2853; }
+    @media (prefers-color-scheme: dark) {
+      :root { --paper: #141414; --ink-muted: #A3A3A3; --accent: #EC5B86; }
+    }
+    body {
+      margin: 0; min-height: 100vh; display: grid; place-items: center;
+      background: var(--paper); color: var(--ink-muted);
+      font: 400 16px/1.5 "Geist", system-ui, sans-serif;
+    }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <p>Taking you to <a href="landing/index.html">SunLinks</a>.</p>
+</body>
+</html>
