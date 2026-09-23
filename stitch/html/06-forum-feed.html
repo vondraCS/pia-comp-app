@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forum Feed — [App Name]</title>
+  <!-- Google Fonts: Newsreader (Serif) & DM Sans (Sans-serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap" rel="stylesheet">
+  <!-- Material Symbols Outlined -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#F7F3EC',
+            surface: '#FFFDF9',
+            hairline: '#E6DFD3',
+            ink: '#1C1A17',
+            'ink-muted': '#6B655C',
+            evergreen: '#2F4F43',
+            'evergreen-soft': '#DCE6DF',
+            sand: '#EFE7DA',
+            'sand-light': '#F4EFE6'
+          },
+          fontFamily: {
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+  </style>
+</head>
+<body class="bg-paper text-ink font-sans antialiased min-h-screen pb-24 selection:bg-evergreen-soft selection:text-evergreen">
+
+  <!-- Main Mobile Container (max-w-md matching ASU app screens) -->
+  <div class="max-w-md mx-auto min-h-screen bg-paper relative flex flex-col shadow-sm border-x border-hairline/60">
+
+    <!-- Top Sticky Header -->
+    <header class="sticky top-0 z-30 bg-paper/95 backdrop-blur-md border-b border-hairline pt-3 pb-2 px-5">
+      <div class="flex items-center justify-between h-10 mb-2">
+        <h1 class="font-serif text-[26px] font-medium tracking-tight text-ink leading-none">Forum</h1>
+        <div class="flex items-center gap-3">
+          <button class="w-9 h-9 flex items-center justify-center rounded-full text-ink-muted hover:text-ink hover:bg-sand/60 transition-colors" aria-label="Search forum">
+            <span class="material-symbols-outlined text-[22px]">search</span>
+          </button>
+          <button class="w-9 h-9 flex items-center justify-center rounded-full text-ink-muted hover:text-ink hover:bg-sand/60 transition-colors" aria-label="Forum notifications">
+            <span class="material-symbols-outlined text-[22px]">notifications</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Horizontally scrolling filter chips -->
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-5 px-5 text-[13px]">
+        <!-- All (selected) -->
+        <button class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-evergreen-soft text-evergreen font-medium whitespace-nowrap transition-colors">
+          All
+        </button>
+        <!-- Questions -->
+        <button class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-surface border border-hairline text-ink-muted hover:text-ink whitespace-nowrap transition-colors">
+          Questions
+        </button>
+        <!-- Opportunities -->
+        <button class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-surface border border-hairline text-ink-muted hover:text-ink whitespace-nowrap transition-colors">
+          Opportunities
+        </button>
+        <!-- Study groups -->
+        <button class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-surface border border-hairline text-ink-muted hover:text-ink whitespace-nowrap transition-colors">
+          Study groups
+        </button>
+        <!-- Events -->
+        <button class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-surface border border-hairline text-ink-muted hover:text-ink whitespace-nowrap transition-colors">
+          Events
+        </button>
+        <!-- #CSE205 -->
+        <button class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-surface border border-hairline text-evergreen font-medium whitespace-nowrap hover:bg-sand/50 transition-colors">
+          #CSE205
+        </button>
+        <!-- #startups -->
+        <button class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-surface border border-hairline text-evergreen font-medium whitespace-nowrap hover:bg-sand/50 transition-colors">
+          #startups
+        </button>
+      </div>
+    </header>
+
+    <!-- Sand Band: HAPPENING AT ASU -->
+    <section class="bg-sand border-b border-hairline py-3.5 px-5">
+      <div class="flex items-center justify-between mb-2.5">
+        <span class="text-[11px] font-semibold tracking-wider uppercase text-ink-muted">Happening at ASU</span>
+        <a href="#" class="text-[12px] text-evergreen font-medium flex items-center gap-0.5 hover:underline">
+          View calendar <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+        </a>
+      </div>
+
+      <!-- Horizontally scrolling compact event cards -->
+      <div class="flex items-stretch gap-3 overflow-x-auto no-scrollbar -mx-5 px-5 pb-0.5">
+        <!-- Event Card 1 -->
+        <div class="flex-shrink-0 w-[265px] bg-surface rounded-xl border border-hairline p-3 flex items-start gap-3 shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-evergreen/30 transition-all cursor-pointer">
+          <div class="w-12 h-12 rounded-lg bg-sand-light border border-hairline flex flex-col items-center justify-center flex-shrink-0 text-center">
+            <span class="text-[10px] font-bold tracking-wider text-ink-muted uppercase leading-tight">SEP</span>
+            <span class="font-serif text-[18px] font-semibold text-ink leading-tight">29</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-medium text-[13.5px] text-ink leading-snug truncate">Career Fair Prep Workshop</h3>
+            <p class="text-[12px] text-ink-muted flex items-center gap-1 mt-0.5">
+              <span class="material-symbols-outlined text-[13px] text-ink-muted">location_on</span>
+              <span class="truncate">Memorial Union</span>
+            </p>
+            <p class="text-[11px] text-ink-muted/90 flex items-center gap-1 mt-1.5">
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-evergreen"></span>
+              <span>3 connections interested</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Event Card 2 -->
+        <div class="flex-shrink-0 w-[265px] bg-surface rounded-xl border border-hairline p-3 flex items-start gap-3 shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-evergreen/30 transition-all cursor-pointer">
+          <div class="w-12 h-12 rounded-lg bg-sand-light border border-hairline flex flex-col items-center justify-center flex-shrink-0 text-center">
+            <span class="text-[10px] font-bold tracking-wider text-ink-muted uppercase leading-tight">OCT</span>
+            <span class="font-serif text-[18px] font-semibold text-ink leading-tight">2</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-medium text-[13.5px] text-ink leading-snug truncate">Employer Info Session: Intel</h3>
+            <p class="text-[12px] text-ink-muted flex items-center gap-1 mt-0.5">
+              <span class="material-symbols-outlined text-[13px] text-ink-muted">location_on</span>
+              <span class="truncate">Student Pavilion · Senita</span>
+            </p>
+            <p class="text-[11px] text-ink-muted/90 flex items-center gap-1 mt-1.5">
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-evergreen"></span>
+              <span>7 connections RSVP'd</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Event Card 3 (Peek) -->
+        <div class="flex-shrink-0 w-[240px] bg-surface rounded-xl border border-hairline p-3 flex items-start gap-3 shadow-[0_1px_2px_rgba(0,0,0,0.03)] opacity-80 cursor-pointer">
+          <div class="w-12 h-12 rounded-lg bg-sand-light border border-hairline flex flex-col items-center justify-center flex-shrink-0 text-center">
+            <span class="text-[10px] font-bold tracking-wider text-ink-muted uppercase leading-tight">OCT</span>
+            <span class="font-serif text-[18px] font-semibold text-ink leading-tight">5</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-medium text-[13.5px] text-ink leading-snug truncate">Fulton Pitch Showcase</h3>
+            <p class="text-[12px] text-ink-muted flex items-center gap-1 mt-0.5">
+              <span class="material-symbols-outlined text-[13px] text-ink-muted">location_on</span>
+              <span>Brickyard Artisan</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Forum Feed Posts: separated by thin hairlines (no boxed cards) -->
+    <main class="divide-y divide-hairline">
+
+      <!-- Post a: Question -->
+      <article class="p-5 hover:bg-sand/20 transition-colors">
+        <div class="flex items-start gap-3">
+          <!-- Monogram tile SP -->
+          <div class="w-10 h-10 rounded-xl bg-sand border border-hairline flex items-center justify-center flex-shrink-0 text-evergreen font-serif text-[15px] font-semibold tracking-normal shadow-sm">
+            SP
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <!-- Author line -->
+            <div class="flex items-baseline justify-between gap-2">
+              <div class="flex items-baseline flex-wrap gap-x-1.5 text-[14px]">
+                <span class="font-medium text-ink">Sam Patel</span>
+                <span class="text-ink-muted/50 text-[11px]">·</span>
+                <span class="text-ink-muted text-[13px]">Freshman</span>
+                <span class="text-ink-muted/50 text-[11px]">·</span>
+                <span class="text-ink-muted text-[13px]">Computer Science</span>
+              </div>
+              <span class="text-ink-muted text-[12px] whitespace-nowrap">2h</span>
+            </div>
+
+            <!-- Uppercase Label -->
+            <div class="mt-1">
+              <span class="inline-flex items-center text-[10px] font-bold tracking-wider uppercase text-evergreen bg-evergreen-soft/60 px-2 py-0.5 rounded">
+                Question
+              </span>
+            </div>
+
+            <!-- Post Body -->
+            <p class="font-serif text-[17px] text-ink leading-relaxed mt-2.5">
+              &ldquo;Any resume tips for a first internship when you don't have work experience yet?&rdquo;
+            </p>
+
+            <!-- Tags in Evergreen -->
+            <div class="flex items-center gap-2 mt-3 text-[13px] font-medium text-evergreen">
+              <a href="#" class="hover:underline">#resume</a>
+              <a href="#" class="hover:underline">#internships</a>
+            </div>
+
+            <!-- Action Row -->
+            <div class="flex items-center justify-between mt-4 pt-2 text-ink-muted text-[13px]">
+              <div class="flex items-center gap-5">
+                <button class="flex items-center gap-1.5 hover:text-ink transition-colors">
+                  <span class="material-symbols-outlined text-[19px]">chat_bubble_outline</span>
+                  <span>12</span>
+                </button>
+                <button class="flex items-center gap-1.5 hover:text-evergreen transition-colors">
+                  <span class="material-symbols-outlined text-[19px]">thumb_up</span>
+                  <span>Helpful (8)</span>
+                </button>
+                <button class="flex items-center gap-1.5 hover:text-ink transition-colors" aria-label="Share">
+                  <span class="material-symbols-outlined text-[19px]">share</span>
+                </button>
+              </div>
+              <button class="flex items-center gap-1 hover:text-ink transition-colors" aria-label="Save">
+                <span class="material-symbols-outlined text-[19px]">bookmark_border</span>
+                <span class="text-[12px]">Save</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Post b: Opportunity -->
+      <article class="p-5 hover:bg-sand/20 transition-colors">
+        <div class="flex items-start gap-3">
+          <!-- Monogram tile AB -->
+          <div class="w-10 h-10 rounded-xl bg-sand border border-hairline flex items-center justify-center flex-shrink-0 text-evergreen font-serif text-[15px] font-semibold tracking-normal shadow-sm">
+            AB
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <!-- Author line -->
+            <div class="flex items-baseline justify-between gap-2">
+              <div class="flex items-baseline flex-wrap gap-x-1.5 text-[14px]">
+                <span class="font-medium text-ink">Aaliyah Brooks</span>
+                <span class="text-ink-muted/50 text-[11px]">·</span>
+                <span class="text-ink-muted text-[13px]">Sophomore</span>
+                <span class="text-ink-muted/50 text-[11px]">·</span>
+                <span class="text-ink-muted text-[13px]">Graphic Design</span>
+              </div>
+              <span class="text-ink-muted text-[12px] whitespace-nowrap">5h</span>
+            </div>
+
+            <!-- Uppercase Label -->
+            <div class="mt-1">
+              <span class="inline-flex items-center text-[10px] font-bold tracking-wider uppercase text-evergreen bg-evergreen-soft/60 px-2 py-0.5 rounded">
+                Opportunity
+              </span>
+            </div>
+
+            <!-- OPPORTUNITY in a Surface card with hairline border -->
+            <div class="mt-3 bg-surface rounded-xl border border-hairline p-4 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h4 class="font-serif text-[18px] font-semibold text-ink leading-snug">Design co-founder</h4>
+                  <p class="text-[13px] text-ink font-normal mt-0.5">Early-stage edtech startup</p>
+                </div>
+                <span class="material-symbols-outlined text-ink-muted text-[20px]">handshake</span>
+              </div>
+
+              <div class="mt-3 flex items-center justify-between pt-2 border-t border-hairline/70">
+                <div class="flex items-center gap-1.5 text-[12px] text-ink-muted">
+                  <span class="material-symbols-outlined text-[15px] text-evergreen">schedule</span>
+                  <span>Apply by Oct 10</span>
+                </div>
+                <!-- Evergreen pill button Interested -->
+                <button class="px-4 py-1.5 rounded-full bg-evergreen text-surface text-[12.5px] font-medium hover:bg-evergreen/90 transition-all shadow-sm active:scale-95">
+                  Interested
+                </button>
+              </div>
+            </div>
+
+            <!-- Action Row -->
+            <div class="flex items-center justify-between mt-3.5 pt-1 text-ink-muted text-[13px]">
+              <div class="flex items-center gap-5">
+                <button class="flex items-center gap-1.5 hover:text-ink transition-colors">
+                  <span class="material-symbols-outlined text-[19px]">chat_bubble_outline</span>
+                  <span>5</span>
+                </button>
+                <button class="flex items-center gap-1.5 hover:text-evergreen transition-colors">
+                  <span class="material-symbols-outlined text-[19px]">thumb_up</span>
+                  <span>Helpful (14)</span>
+                </button>
+                <button class="flex items-center gap-1.5 hover:text-ink transition-colors">
+                  <span class="material-symbols-outlined text-[19px]">share</span>
+                </button>
+              </div>
+              <button class="flex items-center gap-1 hover:text-ink transition-colors">
+                <span class="material-symbols-outlined text-[19px]">bookmark_border</span>
+                <span class="text-[12px]">Save</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Post c: Study Group -->
+      <article class="p-5 hover:bg-sand/20 transition-colors">
+        <div class="flex items-start gap-3">
+          <!-- Monogram tile JR -->
+          <div class="w-10 h-10 rounded-xl bg-sand border border-hairline flex items-center justify-center flex-shrink-0 text-evergreen font-serif text-[15px] font-semibold tracking-normal shadow-sm">
+            JR
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <!-- Author line -->
+            <div class="flex items-baseline justify-between gap-2">
+              <div class="flex items-baseline flex-wrap gap-x-1.5 text-[14px]">
+                <span class="font-medium text-ink">Jordan Reyes</span>
+                <span class="text-ink-muted/50 text-[11px]">·</span>
+                <span class="text-ink-muted text-[13px]">Senior</span>
+                <span class="text-ink-muted/50 text-[11px]">·</span>
+                <span class="text-ink-muted text-[13px]">Supply Chain</span>
+              </div>
+              <span class="text-ink-muted text-[12px] whitespace-nowrap">1d</span>
+            </div>
+
+            <!-- Uppercase Label & Chip -->
+            <div class="mt-1 flex items-center gap-2">
+              <span class="inline-flex items-center text-[10px] font-bold tracking-wider uppercase text-evergreen bg-evergreen-soft/60 px-2 py-0.5 rounded">
+                Study Group
+              </span>
+              <!-- Bold chip CSE 205 -->
+              <span class="inline-flex items-center text-[11px] font-bold tracking-tight text-ink bg-sand px-2.5 py-0.5 rounded-full border border-hairline">
+                CSE 205
+              </span>
+            </div>
+
+            <!-- Details -->
+            <div class="mt-2.5">
+              <p class="font-serif text-[16.5px] text-ink leading-snug">
+                Object-Oriented Programming &amp; Data Structures midterm study sprint.
+              </p>
+              <p class="text-[13px] text-ink-muted flex items-center gap-1.5 mt-1.5">
+                <span class="material-symbols-outlined text-[16px] text-evergreen">event_repeat</span>
+                <span>Meets weekly · Tempe library</span>
+              </p>
+            </div>
+
+            <!-- Members row & Join pill button -->
+            <div class="mt-3.5 flex items-center justify-between pt-1">
+              <div class="flex items-center gap-2">
+                <!-- Stacked monograms -->
+                <div class="flex -space-x-2 overflow-hidden items-center">
+                  <div class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-sand-light border-2 border-paper text-[10px] font-serif font-medium text-ink">
+                    ML
+                  </div>
+                  <div class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-sand border-2 border-paper text-[10px] font-serif font-medium text-ink">
+                    KT
+                  </div>
+                  <div class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-evergreen-soft border-2 border-paper text-[10px] font-serif font-medium text-evergreen">
+                    DA
+                  </div>
+                  <div class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-sand-light border-2 border-paper text-[10px] font-serif font-medium text-ink-muted">
+                    +1
+                  </div>
+                </div>
+                <span class="text-[12px] text-ink-muted font-medium">4 members</span>
+              </div>
+
+              <!-- Pill button Join -->
+              <button class="px-5 py-1.5 rounded-full bg-evergreen text-surface text-[12.5px] font-medium hover:bg-evergreen/90 transition-all shadow-sm active:scale-95">
+                Join
+              </button>
+            </div>
+
+            <!-- Action Row -->
+            <div class="flex items-center justify-between mt-4 pt-1 text-ink-muted text-[13px]">
+              <div class="flex items-center gap-5">
+                <button class="flex items-center gap-1.5 hover:text-ink transition-colors">
+                  <span class="material-symbols-outlined text-[19px]">chat_bubble_outline</span>
+                  <span>7</span>
+                </button>
+                <button class="flex items-center gap-1.5 hover:text-evergreen transition-colors">
+                  <span class="material-symbols-outlined text-[19px]">thumb_up</span>
+                  <span>Helpful (11)</span>
+                </button>
+                <button class="flex items-center gap-1.5 hover:text-ink transition-colors">
+                  <span class="material-symbols-outlined text-[19px]">share</span>
+                </button>
+              </div>
+              <button class="flex items-center gap-1 hover:text-ink transition-colors">
+                <span class="material-symbols-outlined text-[19px]">bookmark_border</span>
+                <span class="text-[12px]">Save</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </main>
+
+    <!-- Floating Evergreen pill button bottom-right with pencil icon and "Post", one soft shadow -->
+    <div class="fixed bottom-20 right-6 z-40 max-w-md pointer-events-none">
+      <button class="pointer-events-auto inline-flex items-center gap-2 px-5 py-3 rounded-full bg-evergreen text-surface font-medium text-[14px] shadow-[0_8px_20px_rgba(47,79,67,0.28)] hover:bg-evergreen/90 hover:scale-[1.02] active:scale-95 transition-all">
+        <span class="material-symbols-outlined text-[19px]">edit</span>
+        <span>Post</span>
+      </button>
+    </div>
+
+    <!-- Bottom Tab Bar (Exact tabs: Home, Forum active, Search, Messages, Profile) -->
+    <nav class="fixed bottom-0 left-0 w-full z-50 bg-paper/95 backdrop-blur-md border-t border-hairline py-2">
+      <div class="max-w-md mx-auto px-4 flex justify-around items-center">
+        <!-- Home -->
+        <a href="#" class="flex flex-col items-center justify-center py-1 text-ink-muted hover:text-ink transition-colors w-14">
+          <span class="material-symbols-outlined text-[23px]">home</span>
+          <span class="text-[11px] font-medium tracking-tight mt-0.5">Home</span>
+        </a>
+
+        <!-- Forum (active, filled icon) -->
+        <a href="#" class="flex flex-col items-center justify-center py-1 text-evergreen transition-colors w-14">
+          <span class="material-symbols-outlined fill-icon text-[23px]">forum</span>
+          <span class="text-[11px] font-semibold tracking-tight mt-0.5">Forum</span>
+        </a>
+
+        <!-- Search -->
+        <a href="#" class="flex flex-col items-center justify-center py-1 text-ink-muted hover:text-ink transition-colors w-14">
+          <span class="material-symbols-outlined text-[23px]">search</span>
+          <span class="text-[11px] font-medium tracking-tight mt-0.5">Search</span>
+        </a>
+
+        <!-- Messages -->
+        <a href="#" class="flex flex-col items-center justify-center py-1 text-ink-muted hover:text-ink transition-colors w-14 relative">
+          <span class="material-symbols-outlined text-[23px]">chat_bubble_outline</span>
+          <span class="text-[11px] font-medium tracking-tight mt-0.5">Messages</span>
+        </a>
+
+        <!-- Profile -->
+        <a href="#" class="flex flex-col items-center justify-center py-1 text-ink-muted hover:text-ink transition-colors w-14">
+          <span class="material-symbols-outlined text-[23px]">person_outline</span>
+          <span class="text-[11px] font-medium tracking-tight mt-0.5">Profile</span>
+        </a>
+      </div>
+    </nav>
+
+  </div>
+
+</body>
+</html>

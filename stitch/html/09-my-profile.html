@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile — [App Name]</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#F7F3EC',
+            surface: '#FFFDF9',
+            hairline: '#E6DFD3',
+            ink: '#1C1A17',
+            'ink-muted': '#6B655C',
+            evergreen: '#2F4F43',
+            'evergreen-dark': '#243e35',
+            'evergreen-soft': '#DCE6DF',
+          },
+          fontFamily: {
+            serif: ['Newsreader', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      background-color: #F7F3EC;
+      color: #1C1A17;
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex justify-center bg-[#eae4d9]">
+
+  <!-- Mobile Screen Container -->
+  <main class="w-full max-w-[420px] bg-paper min-h-screen flex flex-col relative shadow-2xl border-x border-hairline pb-28">
+
+    <!-- Top App Bar -->
+    <header class="sticky top-0 z-30 bg-paper/90 backdrop-blur-md px-5 pt-4 pb-3 flex items-center justify-between border-b border-hairline/60">
+      <span class="text-xs uppercase tracking-[0.16em] font-semibold text-ink-muted">[App Name]</span>
+      <button class="w-9 h-9 rounded-full flex items-center justify-center text-ink-muted hover:text-ink hover:bg-hairline/40 transition-colors" aria-label="Settings">
+        <span class="material-symbols-outlined text-[22px]">settings</span>
+      </button>
+    </header>
+
+    <div class="px-5 pt-5 pb-8 space-y-6">
+
+      <!-- Header: Photo & Identity -->
+      <section class="flex flex-col items-start gap-4">
+        <div class="flex items-start gap-4 w-full">
+          <div class="relative shrink-0">
+            <img 
+              src="https://lh3.googleusercontent.com/aida/AEtjO1U-Oe4LH9yI9R2Kw7LVsmdve3cDVEIDZw1HHSIKiR9BiUEA2GvWBCRqmV62EJjcu-gpdMwv9amyTkhaT6Y1AvZOk9nwMdmIF2Q04-B55NoJPR1awVU8PWQK8WmGT6P4H0dJ1Xh49-iviIDXvhmair-Wm4wVY5TmFOmvPs7WcdQHXHqIxBi6Tktav5IzNZklqycAx5NDVN2greXYdN4mtTX4kkLI7yMSuyEPoWrajzf-aVV_JIQ" 
+              alt="Jordan Reyes portrait" 
+              class="w-20 h-20 rounded-2xl object-cover border border-hairline shadow-sm"
+            />
+            <div class="absolute -bottom-1 -right-1 bg-surface border border-hairline rounded-full p-1 shadow-xs flex items-center justify-center" title="Visible to connections only">
+              <span class="material-symbols-outlined text-xs text-ink-muted">lock</span>
+            </div>
+          </div>
+          <div class="flex-1 min-w-0 pt-0.5">
+            <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-hairline/40 text-[11px] font-medium text-ink-muted mb-1.5">
+              <span class="material-symbols-outlined text-[13px]">lock</span>
+              <span>Visible to connections only</span>
+            </div>
+            <h1 class="font-serif text-[30px] leading-[1.15] font-medium text-ink tracking-tight">
+              Jordan Reyes
+            </h1>
+            <p class="text-sm text-ink-muted font-normal mt-0.5">
+              Senior · Supply Chain Management
+            </p>
+          </div>
+        </div>
+
+        <!-- NOW / DREAM Card -->
+        <div class="w-full bg-surface rounded-2xl border border-hairline p-3.5 grid grid-cols-2 divide-x divide-hairline">
+          <div class="pr-3">
+            <span class="block text-[11px] uppercase tracking-[0.14em] font-semibold text-ink-muted">NOW</span>
+            <span class="text-sm font-semibold text-ink mt-0.5 block leading-tight">Operations Intern</span>
+          </div>
+          <div class="pl-3">
+            <span class="block text-[11px] uppercase tracking-[0.14em] font-semibold text-ink-muted">DREAM</span>
+            <span class="text-sm font-semibold text-ink mt-0.5 block leading-tight">Head of Operations</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Segmented Pill Toggle: Edit | Preview -->
+      <nav class="bg-hairline/50 p-1 rounded-full flex items-center justify-between" aria-label="Profile mode">
+        <button class="flex-1 py-1.5 text-xs font-semibold text-evergreen bg-surface rounded-full shadow-sm transition-all text-center">
+          Edit
+        </button>
+        <button class="flex-1 py-1.5 text-xs font-medium text-ink-muted hover:text-ink transition-all text-center">
+          Preview
+        </button>
+      </nav>
+
+      <!-- Profile Strength Card -->
+      <section class="bg-surface rounded-2xl border border-hairline p-4 space-y-2.5">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] uppercase tracking-[0.14em] font-semibold text-ink-muted">Profile Strength</span>
+          <span class="text-xs font-semibold text-evergreen">70%</span>
+        </div>
+        <!-- Slim Evergreen Progress Bar -->
+        <div class="w-full h-1.5 bg-hairline/60 rounded-full overflow-hidden">
+          <div class="h-full bg-evergreen rounded-full" style="width: 70%;"></div>
+        </div>
+        <p class="text-xs text-ink-muted font-normal leading-relaxed pt-0.5">
+          Add one experience to help people understand what you've done.
+        </p>
+      </section>
+
+      <!-- GOALS Section -->
+      <section class="space-y-2.5">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs uppercase tracking-[0.14em] font-semibold text-ink-muted">GOALS</h2>
+          <button class="text-xs font-semibold text-evergreen hover:underline">Edit</button>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-medium bg-evergreen-soft text-evergreen border border-evergreen/10">
+            Being a mentor
+          </span>
+          <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-medium bg-evergreen-soft text-evergreen border border-evergreen/10">
+            Career development
+          </span>
+        </div>
+      </section>
+
+      <!-- ABOUT Section -->
+      <section class="space-y-2.5">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs uppercase tracking-[0.14em] font-semibold text-ink-muted">ABOUT</h2>
+          <button class="text-xs font-semibold text-evergreen hover:underline">Edit</button>
+        </div>
+        <div class="bg-surface rounded-2xl border border-hairline p-4">
+          <p class="text-[13.5px] leading-relaxed text-ink font-normal">
+            Ops nerd. I like making messy systems calm. Happy to talk internships, recruiting, or how to survive a 7am supply-chain lab.
+          </p>
+        </div>
+      </section>
+
+      <!-- PROMPTS Section -->
+      <section class="space-y-2.5">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs uppercase tracking-[0.14em] font-semibold text-ink-muted">PROMPTS</h2>
+          <button class="text-xs font-semibold text-evergreen hover:underline">Edit</button>
+        </div>
+        <div class="bg-surface rounded-2xl border border-hairline p-4 space-y-2">
+          <p class="font-serif italic text-base text-ink font-medium leading-snug">
+            “My favorite internship taught me…”
+          </p>
+          <p class="text-[13.5px] text-ink font-normal leading-relaxed">
+            To ask 'why' before optimizing anything.
+          </p>
+        </div>
+      </section>
+
+      <!-- EXPERIENCES Section -->
+      <section class="space-y-2.5">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs uppercase tracking-[0.14em] font-semibold text-ink-muted">EXPERIENCES</h2>
+          <button class="text-xs font-semibold text-evergreen hover:underline">Edit</button>
+        </div>
+
+        <!-- Experience Entry Card -->
+        <article class="bg-surface rounded-2xl border border-hairline p-4 space-y-3">
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="text-sm font-semibold text-ink leading-snug">Operations Intern</h3>
+              <p class="text-xs text-ink-muted font-normal mt-0.5">Local Startup · Summer 2026</p>
+            </div>
+            <button class="text-ink-muted hover:text-ink p-1 -mr-1 -mt-1" aria-label="Edit this experience">
+              <span class="material-symbols-outlined text-[18px]">edit</span>
+            </button>
+          </div>
+
+          <ul class="space-y-1.5 text-xs text-ink/90 font-normal leading-relaxed pl-3.5 list-disc marker:text-ink-muted">
+            <li>Standardized intake workflows for campus warehouse fulfillment, cutting prep backlog by 35%.</li>
+            <li>Analyzed daily routing friction and led onboarding for four incoming seasonal team members.</li>
+          </ul>
+
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-evergreen-soft text-evergreen">
+              Workflow Design
+            </span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-evergreen-soft text-evergreen">
+              Fulfillment Logistics
+            </span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-evergreen-soft text-evergreen">
+              Process Improvement
+            </span>
+          </div>
+        </article>
+
+        <!-- + Add Experience Row -->
+        <button class="w-full bg-surface hover:bg-hairline/20 transition-colors rounded-2xl border border-dashed border-hairline p-3.5 flex items-center justify-between text-left group">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-evergreen-soft flex items-center justify-center text-evergreen group-hover:scale-105 transition-transform">
+              <span class="material-symbols-outlined text-lg">add</span>
+            </div>
+            <div>
+              <span class="text-sm font-semibold text-evergreen block leading-snug">+ Add experience</span>
+              <span class="text-xs text-ink-muted font-normal">We'll help you put it into words.</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-ink-muted text-base">chevron_right</span>
+        </button>
+      </section>
+
+      <!-- RESUME Section -->
+      <section class="space-y-2.5">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs uppercase tracking-[0.14em] font-semibold text-ink-muted">RESUME</h2>
+          <button class="text-xs font-semibold text-evergreen hover:underline">Edit</button>
+        </div>
+
+        <!-- Document Card -->
+        <div class="bg-surface rounded-2xl border border-hairline p-3.5 flex items-center justify-between hover:bg-hairline/20 transition-colors cursor-pointer">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-hairline/50 flex items-center justify-center text-ink-muted">
+              <span class="material-symbols-outlined text-xl">description</span>
+            </div>
+            <div>
+              <span class="text-sm font-semibold text-ink block leading-snug">Resume · PDF</span>
+              <span class="text-xs text-ink-muted font-normal">Updated Sep 2026</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-ink-muted text-lg hover:text-ink">open_in_new</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Bottom Tab Bar -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[420px] bg-paper/95 backdrop-blur-md border-t border-hairline px-3 py-2 z-40 flex items-center justify-around shadow-lg">
+      
+      <!-- Home -->
+      <a href="#" class="flex flex-col items-center justify-center py-1 px-2 text-ink-muted hover:text-ink transition-colors">
+        <span class="material-symbols-outlined text-[22px]">home</span>
+        <span class="text-[10px] font-medium tracking-tight mt-0.5">Home</span>
+      </a>
+
+      <!-- Forum -->
+      <a href="#" class="flex flex-col items-center justify-center py-1 px-2 text-ink-muted hover:text-ink transition-colors">
+        <span class="material-symbols-outlined text-[22px]">forum</span>
+        <span class="text-[10px] font-medium tracking-tight mt-0.5">Forum</span>
+      </a>
+
+      <!-- Search -->
+      <a href="#" class="flex flex-col items-center justify-center py-1 px-2 text-ink-muted hover:text-ink transition-colors">
+        <span class="material-symbols-outlined text-[22px]">search</span>
+        <span class="text-[10px] font-medium tracking-tight mt-0.5">Search</span>
+      </a>
+
+      <!-- Messages -->
+      <a href="#" class="flex flex-col items-center justify-center py-1 px-2 text-ink-muted hover:text-ink transition-colors">
+        <span class="material-symbols-outlined text-[22px]">chat_bubble_outline</span>
+        <span class="text-[10px] font-medium tracking-tight mt-0.5">Messages</span>
+      </a>
+
+      <!-- Profile (Active, Filled) -->
+      <a href="#" class="flex flex-col items-center justify-center py-1 px-2 text-evergreen">
+        <span class="material-symbols-outlined fill-icon text-[22px]">person</span>
+        <span class="text-[10px] font-semibold tracking-tight mt-0.5 text-evergreen">Profile</span>
+      </a>
+
+    </nav>
+
+  </main>
+
+</body>
+</html>

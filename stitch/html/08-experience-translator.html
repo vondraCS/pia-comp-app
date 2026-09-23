@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience Translator — Results</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sand: '#EFE7DA',
+            surface: '#FFFDF9',
+            hairline: '#E6DFD3',
+            ink: '#1C1A17',
+            'ink-muted': '#6B655C',
+            evergreen: '#2F4F43',
+            'evergreen-dark': '#233d34',
+            'evergreen-soft': '#DCE6DF',
+          },
+          fontFamily: {
+            serif: ['Newsreader', 'serif'],
+            sans: ['"DM Sans"', 'sans-serif'],
+          },
+          borderRadius: {
+            'card': '14px',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #EFE7DA;
+      color: #1C1A17;
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background-color: #E6DFD3;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-sand flex flex-col justify-between max-w-md mx-auto relative antialiased selection:bg-evergreen-soft selection:text-evergreen">
+
+  <!-- Main Container -->
+  <div class="flex-1 flex flex-col w-full pb-8">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-30 bg-sand/90 backdrop-blur-sm px-5 pt-4 pb-3 border-b border-hairline/60 flex items-center justify-between">
+      <button type="button" aria-label="Go back" class="p-1.5 -ml-1.5 rounded-full text-ink hover:bg-hairline/50 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 stroke-[1.75]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+      </button>
+
+      <div class="flex-1 text-center px-2">
+        <span class="text-[13px] font-medium text-ink-muted tracking-tight truncate block">
+          Barista · Campus Coffee Co. · 2025–Now
+        </span>
+      </div>
+
+      <button type="button" aria-label="Close" class="p-1.5 -mr-1.5 rounded-full text-ink hover:bg-hairline/50 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 stroke-[1.75]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </header>
+
+    <!-- Scrollable Flow Content -->
+    <main class="px-5 pt-6 space-y-6 flex-1">
+
+      <!-- Heading & Overline Section -->
+      <div>
+        <div class="text-[11px] font-semibold tracking-[0.14em] uppercase text-ink-muted mb-1">
+          YOUR EXPERIENCE, TRANSLATED
+        </div>
+        <h1 class="font-serif text-[28px] leading-[1.2] font-normal text-ink">
+          Crafted for resumes & campus recruiters
+        </h1>
+      </div>
+
+      <!-- Main Translated Bullets Card -->
+      <section class="bg-surface rounded-card border border-hairline p-5 shadow-sm space-y-4">
+        <!-- Bullet 1 -->
+        <div class="group relative flex items-start justify-between gap-3 pb-4 border-b border-hairline/70">
+          <div class="flex items-start gap-3">
+            <span class="inline-block text-evergreen font-bold text-base leading-snug select-none">•</span>
+            <p class="text-[15px] leading-relaxed text-ink font-normal">
+              Trained and onboarded 6 new team members on drink preparation, customer service standards and store procedures.
+            </p>
+          </div>
+          <button type="button" aria-label="Edit bullet" class="p-1 text-ink-muted/70 hover:text-ink transition-colors flex-shrink-0 mt-0.5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 stroke-[1.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Bullet 2 -->
+        <div class="group relative flex items-start justify-between gap-3 pb-4 border-b border-hairline/70">
+          <div class="flex items-start gap-3">
+            <span class="inline-block text-evergreen font-bold text-base leading-snug select-none">•</span>
+            <p class="text-[15px] leading-relaxed text-ink font-normal">
+              Redesigned the morning-rush workflow, reducing average wait times during peak hours.
+            </p>
+          </div>
+          <button type="button" aria-label="Edit bullet" class="p-1 text-ink-muted/70 hover:text-ink transition-colors flex-shrink-0 mt-0.5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 stroke-[1.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Bullet 3 -->
+        <div class="group relative flex items-start justify-between gap-3 pt-0.5">
+          <div class="flex items-start gap-3">
+            <span class="inline-block text-evergreen font-bold text-base leading-snug select-none">•</span>
+            <p class="text-[15px] leading-relaxed text-ink font-normal">
+              Served 200+ customers per shift in a fast-paced environment while keeping quality and accuracy high.
+            </p>
+          </div>
+          <button type="button" aria-label="Edit bullet" class="p-1 text-ink-muted/70 hover:text-ink transition-colors flex-shrink-0 mt-0.5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 stroke-[1.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Skills Shown Section -->
+      <section class="space-y-2.5">
+        <div class="text-[11px] font-semibold tracking-[0.14em] uppercase text-ink-muted">
+          SKILLS SHOWN
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3.5 py-1.5 rounded-full bg-evergreen-soft text-evergreen text-[13px] font-medium">
+            Training & onboarding
+          </span>
+          <span class="px-3.5 py-1.5 rounded-full bg-evergreen-soft text-evergreen text-[13px] font-medium">
+            Process improvement
+          </span>
+          <span class="px-3.5 py-1.5 rounded-full bg-evergreen-soft text-evergreen text-[13px] font-medium">
+            Customer service
+          </span>
+          <span class="px-3.5 py-1.5 rounded-full bg-evergreen-soft text-evergreen text-[13px] font-medium">
+            Working under pressure
+          </span>
+        </div>
+      </section>
+
+      <!-- Refine Options Section -->
+      <section class="space-y-2.5">
+        <div class="text-[11px] font-semibold tracking-[0.14em] uppercase text-ink-muted">
+          REFINE
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" class="px-3.5 py-1.5 rounded-full border border-hairline bg-surface hover:border-ink/40 text-ink text-[13px] font-medium transition-all active:scale-[0.98]">
+            Shorter
+          </button>
+          <button type="button" class="px-3.5 py-1.5 rounded-full border border-hairline bg-surface hover:border-ink/40 text-ink text-[13px] font-medium transition-all active:scale-[0.98]">
+            More detail
+          </button>
+          <button type="button" class="px-3.5 py-1.5 rounded-full border border-hairline bg-surface hover:border-ink/40 text-ink text-[13px] font-medium transition-all active:scale-[0.98]">
+            Emphasize leadership
+          </button>
+          <button type="button" class="px-3.5 py-1.5 rounded-full border border-hairline bg-surface hover:border-ink/40 text-ink text-[13px] font-medium transition-all active:scale-[0.98]">
+            Emphasize technical skills
+          </button>
+        </div>
+      </section>
+
+      <!-- Collapsible 'Your words' Section (Expanded) -->
+      <section class="bg-surface/80 rounded-card border border-hairline overflow-hidden">
+        <div class="px-4 py-3 flex items-center justify-between border-b border-hairline/60">
+          <span class="text-[13px] font-semibold text-ink uppercase tracking-wider">Your words</span>
+          <button type="button" aria-label="Toggle section" class="text-ink-muted hover:text-ink transition-colors p-0.5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 stroke-[1.75]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+            </svg>
+          </button>
+        </div>
+        <div class="p-4 bg-[#FAF6EE]">
+          <p class="font-serif italic text-ink-muted text-[15px] leading-relaxed">
+            “I worked at the campus coffee shop, trained the new people, and figured out a faster way to handle the morning rush.”
+          </p>
+        </div>
+      </section>
+
+      <!-- Profile Visibility Toggle Row -->
+      <div class="flex items-center justify-between pt-1 px-1">
+        <div>
+          <span class="text-[14px] font-medium text-ink block">Show on my profile</span>
+          <span class="text-[12px] text-ink-muted block">Visible to verified ASU peers and recruiters</span>
+        </div>
+        
+        <!-- Toggle Switch (Active Evergreen) -->
+        <button type="button" role="switch" aria-checked="true" class="w-12 h-6 bg-evergreen rounded-full p-0.5 transition-colors relative flex items-center focus:outline-none focus:ring-2 focus:ring-evergreen/30">
+          <span class="w-5 h-5 bg-white rounded-full shadow-sm transform translate-x-6 transition-transform block"></span>
+        </button>
+      </div>
+
+    </main>
+
+    <!-- Bottom Action CTA Buttons -->
+    <footer class="px-5 pt-4 space-y-2.5">
+      <!-- Copy bullets (secondary outline pill) -->
+      <button type="button" class="w-full py-3 px-4 rounded-full border border-hairline bg-surface hover:bg-hairline/30 text-ink text-[14px] font-medium transition-colors flex items-center justify-center gap-2 active:scale-[0.99]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 stroke-[1.75] text-ink-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
+        </svg>
+        <span>Copy bullets</span>
+      </button>
+
+      <!-- Save experience (primary Evergreen pill) -->
+      <button type="button" class="w-full py-3.5 px-4 rounded-full bg-evergreen hover:bg-evergreen-dark text-white text-[15px] font-medium tracking-wide shadow-sm transition-all flex items-center justify-center active:scale-[0.99]">
+        Save experience
+      </button>
+    </footer>
+
+  </div>
+
+</body>
+</html>

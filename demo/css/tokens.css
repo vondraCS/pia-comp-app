@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Design tokens — the single place to restyle the demo.
+   Values follow app-design-document.md §3 (warm editorial direction).
+   ========================================================================== */
+:root {
+  /* Color */
+  --paper: #F7F3EC;          /* app background */
+  --surface: #FFFDF9;        /* cards, sheets, inputs */
+  --ink: #1C1A17;            /* headlines, primary text */
+  --ink-muted: #6B655C;      /* secondary text, meta */
+  --hairline: #E6DFD3;       /* dividers, card borders */
+  --accent: #2F4F43;         /* Evergreen: primary actions, active states */
+  --accent-soft: #DCE6DF;    /* selected chips, tag backgrounds */
+  --accent-ink: #FFFDF9;     /* text on accent */
+  --spice: #B5654A;          /* Clay: rare emphasis, max once per screen */
+  --sand: #EFE7DA;           /* subtle section bands */
+  --error: #A8402F;
+  --scrim: rgba(28, 26, 23, 0.36);
+
+  /* Monogram tints (pre-connection avatars) */
+  --tint-1: #DCE6DF;
+  --tint-2: #EFE0D6;
+  --tint-3: #E4E1EE;
+  --tint-4: #E9E4CF;
+  --tint-5: #D9E4EA;
+
+  /* Type */
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-sans: "Instrument Sans", "DM Sans", system-ui, sans-serif;
+  --fs-display: 32px;
+  --fs-title: 24px;
+  --fs-prompt: 18px;
+  --fs-body: 16px;
+  --fs-label: 15px;
+  --fs-meta: 13px;
+  --fs-overline: 12px;
+  --fs-tab: 11px;
+
+  /* Shape */
+  --r-swipe: 20px;
+  --r-sheet: 20px;
+  --r-card: 14px;
+  --r-input: 12px;
+  --r-bubble: 18px;
+  --r-pill: 999px;
+
+  /* Space (8pt grid) */
+  --gutter: 20px;
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+
+  /* Elevation — only swipe card + floating buttons */
+  --shadow-float: 0 8px 24px rgba(28, 26, 23, 0.08);
+
+  /* Motion */
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --spring: cubic-bezier(.34, 1.3, .64, 1);
+  --dur: 260ms;
+
+  /* Chrome */
+  --tabbar-h: 64px;
+  --phone-w: 390px;
+  --phone-h: 844px;
+  --desk-bg: #E4DED3;
+}
