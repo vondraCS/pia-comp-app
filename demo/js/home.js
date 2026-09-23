@@ -4,6 +4,11 @@
   App.init("home");
   const screen = $("#screen");
   let view = App.param("view") === "likes" ? "likes" : "discover";
+  /* How the deck should arrive on the next render. The screen is rebuilt from
+     scratch every time, so the card promoted to the top is born in its final
+     position with nothing to transition from — it has to be told to animate in,
+     and only when a swipe or an undo actually moved the deck. */
+  let deckEnter = "";
 
   const deckIds = () => {
     const s = Store.get();
@@ -27,7 +32,7 @@
           <a class="btn btn-secondary" href="forum.html">Go to Forum</a>
           ${Store.get().undo ? `<div style="margin-top:16px"><button class="btn btn-ghost" data-undo>${icon("undo-2")}Undo last pass</button></div>` : ""}</div>`;
       } else {
-        body = `<div class="deck">${ids.slice(0, 2).reverse().map((id, i, arr) => cardHTML(person(id), arr.length === 2 && i === 0)).join("")}</div>
+        body = `<div class="deck${deckEnter}">${ids.slice(0, 2).reverse().map((id, i, arr) => cardHTML(person(id), arr.length === 2 && i === 0)).join("")}</div>
           <div class="deck-actions">
             <button class="round-btn undo" data-undo ${Store.get().undo ? "" : "disabled"} aria-label="Undo last pass">${icon("undo-2")}</button>
             <button class="round-btn pass" data-pass aria-label="Pass">${icon("x")}</button>
@@ -52,11 +57,13 @@
         <button class="${view === "discover" ? "is-on" : ""}" data-view="discover">Discover</button>
         <button class="${view === "likes" ? "is-on" : ""}" data-view="likes">Likes you ${likes.length ? `<span class="badge">${likes.length}</span>` : ""}</button>
       </div></div>${body}`;
+    deckEnter = "";
     icons();
     bind();
   }
 
   function bind() {
+    App.segmented(".segmented", "home-view");
     $("[data-prefs]").onclick = App.openPrefs;
     $$("[data-view]").forEach((b) => (b.onclick = () => { view = b.dataset.view; history.replaceState(null, "", view === "likes" ? "?view=likes" : location.pathname); render(); }));
     $$("[data-undo]").forEach((b) => (b.onclick = undo));
@@ -112,8 +119,10 @@
     const commit = () => {
       busy = false;
       const s = Store.get();
-      if (kind === "pass") { s.passed.push(id); s.undo = id; Store.save(); render(); }
-      else { s.undo = null; Store.save(); render(); App.connect(id); }
+      // App.connect dispatches demo:changed, which re-renders and would consume
+      // deckEnter before the deck is rebuilt. Flag it for the render we own.
+      if (kind === "pass") { s.passed.push(id); s.undo = id; Store.save(); deckEnter = " is-advancing"; render(); }
+      else { s.undo = null; Store.save(); App.connect(id); deckEnter = " is-advancing"; render(); }
     };
     if (instant) return commit();
     const dir = kind === "connect" ? 1 : -1;
@@ -131,7 +140,9 @@
     const who = person(s.undo).first;
     // Put the undone card back on top of the deck.
     D.deck = [s.undo, ...D.deck.filter((x) => x !== s.undo)];
-    s.undo = null; Store.save(); render();
+    s.undo = null; Store.save();
+    deckEnter = " is-returning";
+    render();
     App.toast(`${who} is back`);
   }
 

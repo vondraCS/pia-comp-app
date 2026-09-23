@@ -149,9 +149,13 @@ svg.lucide {
   place-items: center;
   border-radius: var(--r-pill);
   color: var(--ink);
+  transition:
+    background 140ms var(--ease),
+    transform 140ms var(--ease);
 }
 .icon-btn:active {
   background: var(--hairline);
+  transform: scale(0.9);
 }
 .icon-btn .dot {
   position: absolute;
@@ -294,6 +298,18 @@ svg.lucide {
   background: var(--surface);
   font-size: 14px;
   white-space: nowrap;
+  /* Selection is applied by a re-render, so .is-on itself cannot animate;
+     what is left to animate is the press, which is the part that has to
+     feel immediate anyway. .chip.static is pointer-events:none, so it
+     never triggers it. */
+  transition:
+    background 160ms var(--ease),
+    border-color 160ms var(--ease),
+    color 160ms var(--ease),
+    transform 140ms var(--ease);
+}
+.chip:active {
+  transform: scale(0.95);
 }
 .chip svg.lucide {
   width: 16px;
@@ -330,7 +346,11 @@ svg.lucide {
   text-transform: uppercase;
   color: var(--ink-muted);
 }
+/* Counts and unread dots are re-created by their parent's render, so they get
+   an entrance rather than a transition. Both are small and land in well under
+   a frame budget's worth of attention. */
 .badge {
+  animation: pop 240ms var(--ease);
   display: inline-grid;
   place-items: center;
   min-width: 18px;
@@ -348,6 +368,12 @@ svg.lucide {
   border-radius: 50%;
   background: var(--spice);
   display: inline-block;
+  animation: pop-dot 260ms var(--spring);
+}
+@keyframes pop-dot {
+  from {
+    transform: scale(0);
+  }
 }
 .pill-label {
   display: inline-flex;
@@ -367,14 +393,34 @@ svg.lucide {
   height: 12px;
 }
 
-/* ---------- Segmented control ---------- */
+/* ---------- Segmented control ----------
+   The active segment is painted by .seg-thumb, a single element that slides
+   between the buttons, rather than by a background on .is-on. A background
+   could not animate: the screen is rebuilt on every state change, so the new
+   button arrives already active and there is no start value to transition
+   from. App.segmented() inserts the thumb and drives it; see the comment there
+   for how the previous position is recovered. Without that call the control
+   still works and still reads correctly — it just loses the slide. */
 .segmented {
+  position: relative;
   display: flex;
   background: var(--hairline);
   border-radius: var(--r-pill);
   padding: 3px;
 }
+.seg-thumb {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  z-index: 0;
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  transition: transform var(--dur) var(--ease);
+}
 .segmented button {
+  position: relative;
+  z-index: 1;
   flex: 1;
   min-height: 38px;
   border-radius: var(--r-pill);
@@ -385,10 +431,22 @@ svg.lucide {
   align-items: center;
   justify-content: center;
   gap: 6px;
+  /* Colour lags the thumb slightly so the label darkens as the thumb lands
+     under it rather than before it gets there. */
+  transition:
+    color 180ms 60ms var(--ease),
+    transform 140ms var(--ease);
 }
 .segmented button.is-on {
-  background: var(--surface);
   color: var(--ink);
+}
+/* No thumb yet (the first frame, or a control nothing drives): fall back to
+   the background the thumb would have drawn, so the control is never blank. */
+.segmented:not(:has(.seg-thumb)) button.is-on {
+  background: var(--surface);
+}
+.segmented button:active {
+  transform: scale(0.96);
 }
 
 /* ---------- Cards ----------
@@ -470,6 +528,44 @@ svg.lucide {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Anything card-shaped that is actually a button. These are the largest tap
+   targets in the app and were the only ones giving nothing back on press. The
+   scale is deliberately smaller than a chip's: the same 4% on a 160px cell
+   would read as the whole layout flinching. */
+button.card,
+button.list-row,
+.type-row,
+.starter,
+.doc-card,
+.add-row,
+.prompt-slot {
+  transition:
+    transform 140ms var(--ease),
+    background 160ms var(--ease),
+    border-color 160ms var(--ease),
+    box-shadow 160ms var(--ease);
+}
+button.card:active,
+.type-row:active,
+.add-row:active,
+.prompt-slot:active {
+  transform: scale(0.985);
+}
+/* Rows sit flush against their neighbours, so scaling one shows a seam. They
+   take a wash of the page colour instead, bled past the card padding so the
+   highlight spans the full row.
+
+   .doc-card is written both ways: bare inside a card (a row, next to the
+   visibility switch) and as `card doc-card` standing on its own. Only the
+   bare one is a row — on the other the bled wash would draw a sand halo
+   around a card that is already scaling. */
+button.list-row:active,
+.starter:active,
+.doc-card:not(.card):active {
+  background: var(--sand);
+  box-shadow: 0 0 0 6px var(--sand);
 }
 
 /* ---------- Avatars ---------- */
@@ -658,10 +754,17 @@ svg.lucide {
   color: var(--ink-muted);
   text-decoration: none;
   font-size: var(--fs-tab);
+  transition: color 180ms var(--ease);
+}
+.tabbar a:active svg.lucide {
+  transform: scale(0.88);
 }
 .tabbar a svg.lucide {
   width: 22px;
   height: 22px;
+  transition:
+    fill-opacity 220ms var(--ease),
+    transform 160ms var(--ease);
 }
 .tabbar a.is-on {
   color: var(--ink);
@@ -984,6 +1087,45 @@ svg.lucide {
   pointer-events: none;
   box-shadow: none;
 }
+/* Promoting the second card to the top is a re-render, not a transition: the
+   old top card is gone and the new one is built already in place. So the deck
+   is told, for that one render, how its cards arrived — home.js sets the class
+   only when a swipe or an undo actually moved it, never on an incidental
+   re-render, or these would replay at random.
+
+   is-advancing: the card behind rises into the empty top slot, picking up
+   exactly where .is-behind left it. is-returning: an undone card comes back
+   along the path it was thrown out on, so undo reads as a rewind — the
+   return is hard-coded to come from the left because decide() only ever sets
+   s.undo on a pass. Give undo anything to restore from a connect and this
+   needs a direction passed in with the class. */
+.deck.is-advancing .swipe-card:not(.is-behind) {
+  animation: card-promote 300ms var(--ease) backwards;
+}
+.deck.is-advancing .swipe-card.is-behind {
+  animation: card-restack 300ms var(--ease) backwards;
+}
+.deck.is-returning .swipe-card:not(.is-behind) {
+  animation: card-return 360ms var(--spring) backwards;
+}
+@keyframes card-promote {
+  from {
+    transform: translateY(10px) scale(0.96);
+    opacity: 0.7;
+    box-shadow: none;
+  }
+}
+@keyframes card-restack {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes card-return {
+  from {
+    transform: translateX(-480px) rotate(-14deg);
+    opacity: 0;
+  }
+}
 .swipe-card .data-panel {
   margin-top: var(--s-4);
 }
@@ -1059,10 +1201,22 @@ svg.lucide {
   padding: var(--s-4) 0;
   position: relative;
 }
+/* The three most-tapped controls in the demo. The spring on release gives the
+   connect button a little rebound, which is the only place in the deck where
+   an overshoot reads as confidence rather than as wobble. */
 .round-btn {
   display: grid;
   place-items: center;
   border-radius: 50%;
+  transition:
+    transform 220ms var(--spring),
+    background 140ms var(--ease),
+    opacity 140ms var(--ease);
+}
+.round-btn:active {
+  transform: scale(0.88);
+  transition-duration: 90ms;
+  transition-timing-function: var(--ease);
 }
 .round-btn.pass {
   width: 60px;
@@ -1900,5 +2054,68 @@ mark {
 @media (max-width: 519px) {
   .demo-hint {
     display: none;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion
+   Two rules decide what goes here. Motion that only decorates — a badge
+   popping, a card scaling under a thumb, dots blinking — is removed. Motion
+   that *is* the information, or that a script depends on finishing, is kept:
+   the swipe card must still follow the finger, the sheet must still read as
+   arriving from the bottom edge rather than teleporting over the page.
+
+   Anything given `animation: none` that animated *to* its resting state has to
+   be left in that state by hand, or it stays stuck at the from-frame.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  /* Press feedback: keep the colour change, drop the movement. */
+  .btn:active,
+  .chip:active,
+  .icon-btn:active,
+  .round-btn:active,
+  .segmented button:active,
+  button.card:active,
+  .type-row:active,
+  .add-row:active,
+  .prompt-slot:active,
+  .tabbar a:active svg.lucide {
+    transform: none;
+  }
+
+  /* The thumb still has to move — it is what marks the active segment — but it
+     arrives rather than travels. */
+  .seg-thumb {
+    transition-duration: 1ms;
+  }
+
+  .badge,
+  .dot,
+  .bubble,
+  .typing i,
+  .deck.is-advancing .swipe-card,
+  .deck.is-returning .swipe-card {
+    animation: none;
+  }
+
+  /* Both of these animate a width up from zero, so switching them off has to
+     put the bar at its finished length. */
+  .progress-line i {
+    animation: none;
+    width: 100%;
+  }
+  .progress i {
+    transition: none;
+  }
+
+  /* The connection moment's tiles slide and rotate into place and the photo
+     cross-fades on a delay. Show the finished frame instead. */
+  .moment .tile,
+  .moment .tile img {
+    transition: none;
+  }
+
+  .bullets li {
+    transition: none;
   }
 }

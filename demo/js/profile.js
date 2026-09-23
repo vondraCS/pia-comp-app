@@ -90,6 +90,7 @@
 
   function bind() {
     const me = Store.get().me;
+    App.segmented(".segmented", "profile-mode");
     $("[data-settings]").onclick = settings;
     $$("[data-mode]").forEach((b) => (b.onclick = () => { mode = b.dataset.mode; render(); }));
     $$("[data-edit]").forEach((b) => (b.onclick = () => {

@@ -106,6 +106,46 @@
     icons();
   }
 
+  /* ---------- Segmented control ---------- */
+  /* Every tab re-renders by replacing screen.innerHTML, so the rebuilt control
+     is born with the correct button already marked .is-on — a CSS transition on
+     .is-on has no start value to interpolate from and would silently do
+     nothing. Instead the active button is painted by a separate thumb element:
+     we remember where each control last sat, drop the thumb there, force the
+     browser to take that as the start position, then move it. First render has
+     nothing remembered, so the thumb is simply placed — no motion on load.
+
+     `key` identifies the control across renders. It has to be passed in because
+     the element itself does not survive one. */
+  const segLast = new Map();
+  function segmented(root, key) {
+    const el = typeof root === "string" ? $(root) : root;
+    if (!el) return;
+    const btns = $$("button", el);
+    if (!btns.length) return;
+    const to = Math.max(0, btns.findIndex((b) => b.classList.contains("is-on")));
+
+    let thumb = $(".seg-thumb", el);
+    if (!thumb) {
+      thumb = document.createElement("span");
+      thumb.className = "seg-thumb";
+      thumb.setAttribute("aria-hidden", "true");
+      el.prepend(thumb);
+    }
+    // Buttons are flex:1 inside a track with 3px of padding on each side, so
+    // every segment is the same width and translateX(i * 100%) lands exactly.
+    // Measure offsetLeft instead if segments ever stop being equal.
+    thumb.style.width = `calc((100% - 6px) / ${btns.length})`;
+
+    const from = segLast.has(key) ? segLast.get(key) : to;
+    segLast.set(key, to);
+    thumb.style.transition = "none";
+    thumb.style.transform = `translateX(${from * 100}%)`;
+    void thumb.offsetWidth; // flush the start position, or both writes coalesce
+    thumb.style.transition = "";
+    thumb.style.transform = `translateX(${to * 100}%)`;
+  }
+
   /* ---------- Toast ---------- */
   let toastTimer;
   function toast(msg, action) {
@@ -558,7 +598,7 @@
   /* ---------- Expose ---------- */
   window.App = {
     D, Store, $, $$, esc, icon, icons, param, person, fullName, initials, avatar, isConnected, isPending,
-    init, toast, sheet, actionSheet, page, refreshTabbar,
+    init, toast, sheet, actionSheet, page, refreshTabbar, segmented,
     profileBody, expHTML, dataPanel, openProfile, openResume, reportBlock, connect, connectionMoment, ensureThread,
     allPosts, typeName, prefsHTML, bindPrefs, openPrefs, chipPicker, openTranslator, pickPrompt, answerPrompt, swipeCardHTML,
   };

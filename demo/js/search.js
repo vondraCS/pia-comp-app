@@ -75,6 +75,7 @@
   }
 
   function bind() {
+    App.segmented(".segmented", "search-tab");
     const input = $("[data-input]");
     input.oninput = () => { setQuery(input.value, false); render(true); };
     input.onkeydown = (e) => { if (e.key === "Enter") { setQuery(input.value, true); input.blur(); } };
